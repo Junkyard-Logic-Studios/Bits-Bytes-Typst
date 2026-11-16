@@ -7,3 +7,22 @@
   bottom-text: [Martin Werner & Richard Voigtmann],
   lang: "de",
 )
+
+= Was ist das Problem?
+
+= Gibt es nicht schon LaTeX?
+
+= Vergleich - Performance
+= Vergleich - Lokale installation
+= Vergleich - Syntax
+
+= Vorlagen
+
+Beispiele
+
+= Kollaboration
+
+overleaf <-> typst universum
+
+github
+
