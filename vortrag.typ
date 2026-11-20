@@ -12,17 +12,46 @@
 #outline()
 
 = Was ist das Problem?
+- Wir wollen Textdokumente erstellen (Bachelorarbeit und co...)
+- Word ist doof
+  -> Latex?
 
 
 = Gibt es nicht schon LaTeX?
 #grid(
   columns: (4fr, 3fr),
-  [],
+  [
+    Geschichte:
+    - TeX https://de.wikipedia.org/wiki/TeX
+    - LaTeX https://de.wikipedia.org/wiki/LaTeX
+
+    Nutzung:
+    - lokale Installation, MiKTeX, TeXLive, MacTeX
+    - Overleaf
+
+    -> LaTeX ist alt und hat einige Schwierigkeiten
+  ],
   figure(
     image("images/LaTeX-Word-Graph.svg"),
     caption: [LaTeX vs Office X; Mühe und Zeitbeanspruchung aufgetragen gegen Komplexität und Größe des Dokuments (Autor: Matthias M. https://commons.wikimedia.org/wiki/File:LaTeX-Word-Graph.svg)]
   )
 )
+
+= Typst vs. LaTeX
+Side-by-side Dokumente - finde den Unterschied
+#grid(columns: 2)[][]
+
+-> es gibt keinen Unterschied haha
+
+
+= Vorstellung Typst
+ganz kurz Geschichte 
+
+https://de.wikipedia.org/wiki/Typst
+
+- entwickelt von...
+- die machen ihr Geld mit der online Version (Freemium)
+
 
 = Wie kann ich jetzt Typst benutzen? -- Lokale Installation
 - Anzahl an verschiedenen Installationen
@@ -31,13 +60,25 @@
 - Befehle
 - Tinymist VSCode Extension
 
+
 = Performance
 - compile Beispiel an Bachelorarbeit
 - compile Beispiel an Praktikumsbericht
 
-= Syntax -- Scripting
 
-= Figuren -- Referenzen
+= Syntax
+- leichteres Markdown
+- fühlt sich für Programmierer vertraulicher an
+
+Konkret:
+- Content mode
+- Code mode
+- Math mode
+
+
+
+= Figuren -- Referenzen -- tolle Pakete
+
 
 = Vorlagen
 == TUD
@@ -45,8 +86,10 @@ https://github.com/ShadowPaint-SP/TUD-typst-template.git
 == TUBAF
 https://github.com/DM-3/TUBAF_typst_template
 
+
 = Kollaboration
 - overleaf <-> typst universum
 - github
+
 
 = Typst mit KI
