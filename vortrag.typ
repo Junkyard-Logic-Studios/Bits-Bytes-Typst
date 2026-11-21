@@ -57,6 +57,45 @@ Side-by-side Dokumente - finde den Unterschied
 -> es gibt keinen Unterschied haha
 
 
+= Drei Aufgaben, eine Dateiendung
+#grid(
+  columns: (5fr, 6fr),
+  column-gutter: 28pt,
+  [
+    #text(size: 20pt, weight: "bold")[LaTeX]
+    #v(7pt)
+    #line(length: 100%, stroke: 1pt + tubaf.colors.Dunkelblau)
+    #v(10pt)
+    #grid(
+      columns: (64pt, 1fr),
+      row-gutter: 14pt,
+      align: left + horizon,
+      text(size: 24pt)[`.tex`], [Dokument],
+      text(size: 24pt)[`.cls`], [Dokumentklasse, z. B. `scrartcl`],
+      text(size: 24pt)[`.sty`], [Paket für eigene Befehle],
+    )
+  ],
+  [
+    #text(size: 20pt, weight: "bold")[Typst]
+    #v(7pt)
+    #line(length: 100%, stroke: 1pt + tubaf.colors.Dunkelblau)
+    #v(10pt)
+    #text(size: 40pt, fill: tubaf.colors.Dunkelblau)[`.typ`]
+
+    Vorlage und Hilfsfunktionen in derselben Datei.
+
+    #block(width: 100%, inset: 12pt, fill: tubaf.colors.Uniblau.lighten(94%))[
+      #show raw: set text(size: 14pt)
+      ```typ
+      #import "tubaf_template.typ" as tubaf
+      #show: tubaf.presentation
+      #tubaf.tip(lang: "de")[Ein Hinweis]
+      ```
+    ]
+  ],
+)
+
+
 = Vorstellung Typst
 ganz kurz Geschichte
 
@@ -100,9 +139,10 @@ https://github.com/ShadowPaint-SP/TUD-typst-template.git
 https://github.com/DM-3/TUBAF_typst_template
 
 
-= Kollaboration
+= Kollaboration / Versionierung
 - overleaf <-> typst universum
 - github
+- durch git hat man ein mächtiges versionierungssystem und kann änderungen günstig zurücksetzen ohne etwas zu verlieren.
 
 
 = Typst mit KI
