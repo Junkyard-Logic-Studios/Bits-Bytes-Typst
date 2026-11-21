@@ -37,6 +37,17 @@
   )
 )
 
+= LaTeX-Distributionen
+*Aktiv gepflegt*
+- *TeX Live* für Linux, macOS und Windows
+- *MiKTeX* mit automatischer Nachinstallation fehlender Pakete
+- *MacTeX* mit TeX Live und macOS-Programmen wie TeXShop
+- *TinyTeX* als kompakte TeX-Live-Installation, etwa für Quarto
+- *BasicTeX* als kompakte TeX-Live-Installation für macOS
+
+*Historisch* \
+proTeXt, teTeX, W32TeX, gwTeX, OzTeX, fpTeX, emTeX, AmigaTeX, PasTeX
+
 = Typst vs. LaTeX
 Side-by-side Dokumente - finde den Unterschied
 #grid(columns: 2)[][]
