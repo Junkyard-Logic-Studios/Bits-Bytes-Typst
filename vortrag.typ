@@ -33,8 +33,8 @@
   ],
   figure(
     image("images/LaTeX-Word-Graph.svg"),
-    caption: [LaTeX vs Office X; Mühe und Zeitbeanspruchung aufgetragen gegen Komplexität und Größe des Dokuments (Autor: Matthias M. https://commons.wikimedia.org/wiki/File:LaTeX-Word-Graph.svg)]
-  )
+    caption: [LaTeX vs Office X; Mühe und Zeitbeanspruchung aufgetragen gegen Komplexität und Größe des Dokuments (Autor: Matthias M. https://commons.wikimedia.org/wiki/File:LaTeX-Word-Graph.svg)],
+  ),
 )
 
 = LaTeX-Distributionen
@@ -48,6 +48,8 @@
 *Historisch* \
 proTeXt, teTeX, W32TeX, gwTeX, OzTeX, fpTeX, emTeX, AmigaTeX, PasTeX
 
+[Inset grosses Fragezeichen weil wft warum so viele meinungen das sollte doch möglichst einfach zu nutzen sein????]
+
 = Typst vs. LaTeX
 Side-by-side Dokumente - finde den Unterschied
 #grid(columns: 2)[][]
@@ -56,7 +58,7 @@ Side-by-side Dokumente - finde den Unterschied
 
 
 = Vorstellung Typst
-ganz kurz Geschichte 
+ganz kurz Geschichte
 
 https://de.wikipedia.org/wiki/Typst
 

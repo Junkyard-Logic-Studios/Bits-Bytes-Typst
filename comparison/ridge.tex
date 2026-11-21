@@ -1,0 +1,204 @@
+% Overleaf compiler: pdfLaTeX.
+\RequirePackage{fix-cm}              % Scale the default Computer Modern fonts
+\documentclass[a4paper]{article}
+\usepackage[left=21mm,right=21mm,top=23mm,bottom=22mm]{geometry}
+\usepackage{amsmath}                 % Aligned equations and named operators
+\usepackage{amsfonts}                % Blackboard-bold symbols
+\usepackage{multicol}                % Two columns below a full-width title
+\usepackage{titlesec}                % Section heading style and spacing
+\usepackage{enumitem}                % List margins and spacing
+\usepackage[table]{xcolor}           % Colors and table support (loads array via colortbl)
+\usepackage{booktabs}                % Table rules
+\usepackage{listings}                % Python syntax highlighting
+\usepackage[style=ieee]{biblatex}    % IEEE citations and bibliography
+\usepackage[hidelinks]{hyperref}     % Linked equation and bibliography references
+
+\addbibresource{references.bib}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+\definecolor{accent}{HTML}{194F54}
+\definecolor{codebackground}{HTML}{F2F5F5}
+\definecolor{codekeyword}{HTML}{D73948}
+\definecolor{codefunction}{HTML}{4B69C6}
+\definecolor{codenumber}{HTML}{B60157}
+
+\pagestyle{empty}
+\setlength{\columnsep}{10mm}
+\setlength{\multicolsep}{20bp}
+\titleformat{\section}{\normalfont\bfseries\fontsize{13bp}{16bp}\selectfont\color{accent}}{}{0pt}{}
+\titlespacing*{\section}{0pt}{16bp}{4bp}
+\setlist{leftmargin=13bp,labelwidth=8bp,labelsep=5bp,align=left,
+  topsep=3bp,partopsep=0pt,itemsep=-1.5bp,parsep=0pt}
+\setlength{\biblabelsep}{6bp}
+\setlength{\bibitemsep}{3.5bp}
+\AtBeginBibliography{\fontsize{9bp}{12.5bp}\selectfont}
+
+\renewcommand{\footnotesize}{\fontsize{8.5bp}{11.5bp}\selectfont}
+\renewcommand{\footnoterule}{%
+  \kern-3bp\hrule width 32mm height 0.4bp\kern 2.6bp
+}
+\setlength{\skip\footins}{7bp}
+\setlength{\footnotesep}{8.5bp}
+
+\lstset{
+  language=[3]Python,
+  basicstyle=\fontsize{8.5bp}{11.5bp}\selectfont\ttfamily,
+  keywordstyle=\color{codekeyword},
+  emph={ridge,eye,solve,array,print},
+  emphstyle=\color{codefunction},
+  % Match Typst's colors for the characters used in this example.
+  literate=
+    {1}{{\textcolor{codenumber}{1}}}1
+    {2}{{\textcolor{codenumber}{2}}}1
+    {3}{{\textcolor{codenumber}{3}}}1
+    {9}{{\textcolor{codenumber}{9}}}1
+    {=}{{\textcolor{codekeyword}{=}}}1
+    {@}{{\textcolor{codekeyword}{@}}}1
+    {+}{{\textcolor{codekeyword}{+}}}1
+    {*}{{\textcolor{codekeyword}{*}}}1
+    {-}{{\textcolor{codekeyword}{-}}}1,
+  columns=fullflexible,
+  keepspaces=true,
+  backgroundcolor=\color{codebackground},
+  frame=single,
+  framerule=0pt,
+  framesep=7bp,
+  xleftmargin=7bp,
+  xrightmargin=7bp,
+  aboveskip=7bp,
+  belowskip=7bp
+}
+
+\begin{document}
+\raggedright
+\fontsize{10.5bp}{14bp}\selectfont
+\setlength{\abovedisplayskip}{9bp}
+\setlength{\belowdisplayskip}{9bp}
+\setlength{\abovedisplayshortskip}{9bp}
+\setlength{\belowdisplayshortskip}{9bp}
+
+% Reserve the same title and subtitle height and depth as in ridge.typ.
+\noindent\raisebox{0pt}[23.2bp][5.8bp]{%
+  \fontsize{29bp}{29bp}\selectfont\bfseries Ridge regression}%
+\par
+\vspace{10bp}
+\nointerlineskip
+\noindent\raisebox{0pt}[9.6bp][2.4bp]{%
+  \fontsize{12bp}{12bp}\selectfont\color{accent}%
+  A worked example with two correlated predictors}%
+\par
+\vspace{16bp}
+{\color{accent}\hrule height 0.7bp}
+
+\raggedcolumns
+\begin{multicols}{2}
+\setlength{\parskip}{3.5bp}
+
+\section*{The problem}
+
+Two predictors can carry almost the same information. Ordinary least squares
+can then assign them large coefficients of opposite signs. The predictions can
+stay nearly the same even as the coefficients swing.
+
+Ridge regression adds a penalty for large coefficients. Hoerl and Kennard
+introduced the estimator~\cite{hoerl-estimator} and illustrated its behavior with
+examples~\cite{hoerl-applications}.
+
+\section*{The estimator}
+
+Let \(X\) be the \(n\)-by-\(p\) matrix of predictors and \(y\) the response vector.
+Take the columns and the response to be centered.\footnote{%
+  Centering puts the intercept at zero, so the penalty applies only to the
+  slopes.%
+} For a penalty strength \(\lambda \ge 0\), the ridge estimate is
+
+\begin{equation}
+  \label{ridge}
+  \begin{aligned}
+    \hat{\beta}_\lambda
+      &= \argmin_{\beta \in \mathbb{R}^p}
+         \bigl[\lVert y - X\beta\rVert_2^2 + \lambda\lVert\beta\rVert_2^2\bigr] \\
+      &= (X^\top X + \lambda I_p)^{-1} X^\top y.
+  \end{aligned}
+\end{equation}
+
+For \(\lambda > 0\), the added diagonal makes the matrix invertible even if
+two columns of \(X\) are identical. At \(\lambda = 0\), the inverse requires
+full column rank.
+
+\section*{Fitting the model}
+
+\begin{enumerate}
+  \item Center the predictors and the response.
+  \item Pick a penalty strength \(\lambda\).
+  \item Solve the system in Equation~\ref{ridge}.
+\end{enumerate}
+
+\section*{Reading the fit}
+
+The first row of the table shows how a perfect fit can hide large slopes.
+Consider the observation where both predictors are \(2\).
+
+\begin{itemize}
+  \item At \(\lambda = 0\), the slopes nearly cancel. The fitted value is
+    \(2 (-15.50 + 17.00) = 3.00\).
+  \item At \(\lambda = 1\), both slopes are below one. The fitted value drops to
+    about \(2.26\).
+\end{itemize}
+
+\columnbreak
+
+\section*{Computing the solution}
+
+The code uses a linear solve to evaluate Equation~\ref{ridge} without forming a matrix
+inverse. The two columns of \(X\) differ by just \(0.1\) in two of the four rows.
+
+\begin{lstlisting}
+import numpy as np
+
+def ridge(X, y, lam):
+    gram = X.T @ X
+    identity = np.eye(X.shape[1])
+    return np.linalg.solve(
+        gram + lam * identity, X.T @ y
+    )
+
+X = np.array([[1, .9], [2, 2],
+              [-1, -.9], [-2, -2]])
+y = np.array([-.2, 3, .2, -3])
+
+print(ridge(X, y, lam=1))
+\end{lstlisting}
+
+\section*{What changes}
+
+The table reports both slopes and the root mean square error (RMSE) on the
+same four observations used to fit the model.\footnote{%
+  Training RMSE measures fit on these four rows. Choose the penalty using
+  validation data when the goal is prediction.%
+}
+
+\begingroup
+\setlength{\tabcolsep}{0pt}
+\setlength{\aboverulesep}{0pt}
+\setlength{\belowrulesep}{0pt}
+\renewcommand{\arraystretch}{1.18}
+\arrayrulecolor{accent}
+\begin{tabular}{@{}p{.25\columnwidth}*{3}{>{\raggedleft\arraybackslash}p{.25\columnwidth}}@{}}
+  \toprule[0.8bp]
+  \(\lambda\) & \(\hat{\beta}_1\) & \(\hat{\beta}_2\) & \textbf{RMSE} \\
+  \midrule[0.4bp]
+  0.00 & \(-15.50\) & 17.00 & 0.00 \\
+  0.01 &  \(-6.63\) &  7.96 & 0.57 \\
+  0.10 &  \(-0.62\) &  1.82 & 0.96 \\
+  1.00 &       0.44 &  0.69 & 1.03 \\
+  \bottomrule[0.8bp]
+\end{tabular}
+\par
+\endgroup
+
+\section*{References}
+
+\printbibliography[heading=none]
+\end{multicols}
+\end{document}
