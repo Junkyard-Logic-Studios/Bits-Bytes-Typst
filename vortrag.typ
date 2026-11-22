@@ -9,7 +9,9 @@
 )
 #show figure.caption: it => text(size: 9pt)[*#it.supplement #it.counter.display()#it.separator* #it.body]
 
-#outline()
+#outline(depth: 1)
+
+
 
 = Was ist das Problem?
 - Wir wollen Textdokumente erstellen (Bachelorarbeit und co...)
@@ -37,7 +39,7 @@
   ),
 )
 
-= LaTeX-Distributionen
+== LaTeX-Distributionen
 *Aktiv gepflegt*
 - *TeX Live* für Linux, macOS und Windows
 - *MiKTeX* mit automatischer Nachinstallation fehlender Pakete
@@ -50,14 +52,26 @@ proTeXt, teTeX, W32TeX, gwTeX, OzTeX, fpTeX, emTeX, AmigaTeX, PasTeX
 
 [Inset grosses Fragezeichen weil wft warum so viele meinungen das sollte doch möglichst einfach zu nutzen sein????]
 
-= Typst vs. LaTeX
-Side-by-side Dokumente - finde den Unterschied
-#grid(columns: 2)[][]
+== Typst vs. LaTeX
+#place(top + left, dy: 12mm)[
+  #grid(
+    columns: (0.6fr, 1fr, 1fr),
+    fill: color.white,
+  )[
 
--> es gibt keinen Unterschied haha
+  ][
+    #block(stroke: 1pt)[
+      #image("comparison/latex.pdf", height: 92%)
+    ]
+  ][
+    #block(stroke: 1pt)[
+      #image("comparison/typst.pdf", height: 92%)
+    ]
+  ]
+]
 
 
-= Drei Aufgaben, eine Dateiendung
+== Drei Aufgaben, eine Dateiendung
 #grid(
   columns: (5fr, 6fr),
   column-gutter: 28pt,
@@ -140,7 +154,7 @@ https://github.com/DM-3/TUBAF_typst_template
 
 
 = Kollaboration / Versionierung
-- overleaf <-> typst universum
+- overleaf $->$ typst universum
 - github
 - durch git hat man ein mächtiges versionierungssystem und kann änderungen günstig zurücksetzen ohne etwas zu verlieren.
 
