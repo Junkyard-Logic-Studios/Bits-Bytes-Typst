@@ -52,20 +52,18 @@ proTeXt, teTeX, W32TeX, gwTeX, OzTeX, fpTeX, emTeX, AmigaTeX, PasTeX
 
 [Inset grosses Fragezeichen weil wft warum so viele meinungen das sollte doch möglichst einfach zu nutzen sein????]
 
-== Typst vs. LaTeX
-#place(top + left, dy: 12mm)[
+==
+#place(top + left, dy: -10mm)[
   #grid(
-    columns: (0.6fr, 1fr, 1fr),
-    fill: color.white,
+    columns: (1fr, 1fr),
+    align: center,
   )[
-
-  ][
     #block(stroke: 1pt)[
-      #image("comparison/latex.pdf", height: 92%)
+      #image("comparison/latex.pdf", height: 100%)
     ]
   ][
     #block(stroke: 1pt)[
-      #image("comparison/typst.pdf", height: 92%)
+      #image("comparison/typst.pdf", height: 100%)
     ]
   ]
 ]
@@ -160,3 +158,9 @@ https://github.com/DM-3/TUBAF_typst_template
 
 
 = Typst mit KI
+
+mit typst:
+1357 Tokens -> fast 40% weniger tokens (und auch 2000 character weniger)
+
+mit latex:
+2191 Tokens -> ugf 60% mehr tokens als typst
