@@ -1,3 +1,6 @@
 [submodule "TUBAF_typst_template"]
 	path = TUBAF_typst_template
 	url = https://github.com/DM-3/TUBAF_typst_template.git
+[submodule "tud-presentation-template"]
+	path = tud-presentation-template
+	url = https://github.com/ShadowPaint-SP/tud-presentation-template.git

@@ -1,13 +1,40 @@
 #import "TUBAF_typst_template/tubaf_template.typ" as tubaf
 
-#show: tubaf.presentation.with(
-  title: [Typst -- eine moderne Alternative zu LaTeX],
-  subtitle: "Bits & Bytes",
-  author: "Richard & Martin",
-  bottom-text: [Richard Voigtmann\ Martin Werner],
-  lang: "de",
-)
-#show figure.caption: it => text(size: 9pt)[*#it.supplement #it.counter.display()#it.separator* #it.body]
+#let theme = "tubaf" //"tud" //
+#if theme not in ("tubaf", "tud") {
+  panic("Choose theme=tubaf or theme=tud.")
+}
+
+#let tud = if theme == "tud" {
+  import "tud-presentation-template/lib.typ" as template
+  template
+}
+#let accent = if theme == "tud" { tud.tudc.brilliantblau } else { tubaf.colors.Dunkelblau }
+#let talk-title = [Typst -- eine moderne Alternative zu LaTeX]
+#let talk-subtitle = "Bits & Bytes"
+#let speakers = "Richard & Martin"
+#let speaker-names = [Martin Werner - Richard Voigtmann]
+
+#show: body => if theme == "tud" {
+  tud.tud-deck(title: talk-title, author: speakers, lang: "de")[
+    #tud.title-slide-6(title: talk-title, overline: talk-subtitle, extras: speaker-names)[]
+
+    // Top-level headings have slide content in this deck and belong in the agenda.
+    #show heading.where(level: 1): it => heading(level: 2, outlined: false, it.body)
+    #body
+  ]
+} else {
+  tubaf.presentation(
+    title: talk-title,
+    subtitle: talk-subtitle,
+    author: speakers,
+    bottom-text: speaker-names,
+    lang: "de",
+  )[
+    #show figure.caption: it => text(size: 9pt)[*#it.supplement #it.counter.display()#it.separator* #it.body]
+    #body
+  ]
+}
 
 #outline(depth: 1)
 
@@ -53,17 +80,18 @@ proTeXt, teTeX, W32TeX, gwTeX, OzTeX, fpTeX, emTeX, AmigaTeX, PasTeX
 [Inset grosses Fragezeichen weil wft warum so viele meinungen das sollte doch möglichst einfach zu nutzen sein????]
 
 ==
-#place(top + left, dy: -10mm)[
+#let comparison-height = if theme == "tud" { 72mm } else { 100% }
+#place(top + left, dy: if theme == "tud" { 0mm } else { -10mm })[
   #grid(
     columns: (1fr, 1fr),
     align: center,
   )[
     #block(stroke: 1pt)[
-      #image("comparison/latex.pdf", height: 100%)
+      #image("comparison/latex.pdf", height: comparison-height)
     ]
   ][
     #block(stroke: 1pt)[
-      #image("comparison/typst.pdf", height: 100%)
+      #image("comparison/typst.pdf", height: comparison-height)
     ]
   ]
 ]
@@ -72,38 +100,36 @@ proTeXt, teTeX, W32TeX, gwTeX, OzTeX, fpTeX, emTeX, AmigaTeX, PasTeX
 == Drei Aufgaben, eine Dateiendung
 #grid(
   columns: (5fr, 6fr),
-  column-gutter: 28pt,
+  column-gutter: 1.75em,
   [
-    #text(size: 20pt, weight: "bold")[LaTeX]
-    #v(7pt)
-    #line(length: 100%, stroke: 1pt + tubaf.colors.Dunkelblau)
-    #v(10pt)
+    #text(size: 1.25em, weight: "bold")[LaTeX]
+    #v(0.4375em)
+    #line(length: 100%, stroke: 0.0625em + accent)
+    #v(0.625em)
     #grid(
-      columns: (64pt, 1fr),
-      row-gutter: 14pt,
+      columns: (4em, 1fr),
+      row-gutter: 0.875em,
       align: left + horizon,
-      text(size: 24pt)[`.tex`], [Dokument],
-      text(size: 24pt)[`.cls`], [Dokumentklasse, z. B. `scrartcl`],
-      text(size: 24pt)[`.sty`], [Paket für eigene Befehle],
+      text(size: 1.5em)[`.tex`], [Dokument],
+      text(size: 1.5em)[`.cls`], [Dokumentklasse, z. B. `scrartcl`],
+      text(size: 1.5em)[`.sty`], [Paket für eigene Befehle],
     )
   ],
   [
-    #text(size: 20pt, weight: "bold")[Typst]
-    #v(7pt)
-    #line(length: 100%, stroke: 1pt + tubaf.colors.Dunkelblau)
-    #v(10pt)
-    #text(size: 40pt, fill: tubaf.colors.Dunkelblau)[`.typ`]
+    #text(size: 1.25em, weight: "bold")[Typst]
+    #v(0.4375em)
+    #line(length: 100%, stroke: 0.0625em + accent)
+    #v(0.625em)
+    #text(size: 2.5em, fill: accent)[`.typ`]
 
     Vorlage und Hilfsfunktionen in derselben Datei.
 
-    #block(width: 100%, inset: 12pt, fill: tubaf.colors.Uniblau.lighten(94%))[
-      #show raw: set text(size: 14pt)
-      ```typ
-      #import "tubaf_template.typ" as tubaf
-      #show: tubaf.presentation
-      #tubaf.tip(lang: "de")[Ein Hinweis]
-      ```
-    ]
+    ```typ
+    #import "tubaf_template.typ" as tubaf
+    #show: tubaf.presentation
+    #tubaf.tip(lang: "de")[Ein Hinweis]
+    ```
+
   ],
 )
 
