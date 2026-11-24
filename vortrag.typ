@@ -1,7 +1,7 @@
 #import "TUBAF_typst_template/tubaf_template.typ" as tubaf
 
-//#let theme = "tubaf"
-#let theme = "tud"
+#let theme = "tubaf"
+//#let theme = "tud"
 #if theme not in ("tubaf", "tud") {
   panic("Choose theme=tubaf or theme=tud.")
 }
@@ -71,34 +71,60 @@
 )
 #word-critique
 
-// Each frame adds one comment. Keep positions fixed so the earlier comments stay put.
-#let word-comments = (
-  (file: "word_lizenz.png", x: 1em, y: 7em, width: 100%, angle: 10deg),
-  (file: "Wordhate/image.png", x: 16em, y: 12.4em, width: 28em, angle: -6deg),
-  (file: "Wordhate/image copy.png", x: 1em, y: 11em, width: 12.6em, angle: 8deg),
-  (file: "Wordhate/image copy 2.png", x: 2.2em, y: 16.4em, width: 29.3em, angle: 4deg),
-  (file: "Wordhate/image copy 3.png", x: 13.2em, y: 7.8em, width: 31em, angle: -4.5deg),
-  (file: "Wordhate/image copy 4.png", x: 1.6em, y: 3.5em, width: 33em, angle: 3deg),
-  (file: "Wordhate/image copy 5.png", x: 12.7em, y: 19.5em, width: 27em, angle: -3deg),
+// One reveal per click. Earlier images keep their positions as new pairs pile up.
+#let word-reveals = (
+  ((file: "word_lizenz.png", x: 1em, y: 7em, width: 100%, angle: 10deg),),
+  (
+    (file: "Wordhate/image.png", x: 16.3em, y: 10.4em, width: 32.8em, angle: -5deg),
+    (file: "Wordhate/image copy.png", x: -1.7em, y: 10.8em, width: 16.8em, angle: 8deg),
+  ),
+  (
+    (file: "Wordhate/image copy 2.png", x: -0.85em, y: 16.15em, width: 39.5em, angle: 3.5deg),
+    (file: "Wordhate/image copy 3.png", x: 9.8em, y: -0.3em, width: 35.5em, angle: 3.5deg),
+  ),
+  (
+    (file: "Wordhate/image copy 4.png", x: -1.8em, y: 5.4em, width: 32.7em, angle: 4deg),
+    (file: "Wordhate/image copy 5.png", x: 15.1em, y: 19.95em, width: 28em, angle: -2.5deg),
+  ),
+  (
+    (file: "Wordhate/image copy 6.png", x: -1.8em, y: 19.25em, width: 30em, angle: 3deg),
+    (file: "Wordhate/image copy 7.png", x: 9.5em, y: 5.8em, width: 30.3em, angle: -4deg),
+  ),
+  (
+    (file: "Wordhate/image copy 8.png", x: 10.9em, y: 14.8em, width: 38.9em, angle: -3.8deg),
+    (file: "Wordhate/image copy 9.png", x: -1.5em, y: 0.05em, width: 11.8em, angle: -7deg),
+  ),
 )
-#for count in range(1, word-comments.len() + 1) {
-  if theme == "tud" { pagebreak() } else { hidden_heading[Wo Word umständlich wird] }
+#for count in range(1, word-reveals.len() + 1) {
+  if theme == "tud" { pagebreak() } else { hidden_heading[Word und seine Spin-offs] }
   word-critique
-  for comment in word-comments.slice(0, count) {
-    place(top + left, dx: comment.x, dy: comment.y, rotate(
-      comment.angle,
-      image("images/" + comment.file, width: comment.width),
+  for overlay in word-reveals.slice(0, count).flatten() {
+    place(top + left, dx: overlay.x, dy: overlay.y, rotate(
+      overlay.angle,
+      image("images/" + overlay.file, width: overlay.width),
     ))
   }
-  place(bottom + right)[#text(size: 7pt)[@reddit:word_hate_1,@reddit:word_hate_2,@word_lizenz]]
+  place(bottom + right, dy: -20pt, dx: 9pt)[#text(
+    size: 9pt,
+  )[@reddit:word_hate_1,@reddit:word_hate_2,@reddit:word_hate_3,@word_lizenz]]
 }
 #hidden_heading([Word und seine Spin-offs])
+#grid(columns: (45%, 1fr))[
 
-- *Preis.* Word für den Desktop gibt es etwa mit Office Home 2024 für einmalig 149 € oder mit Microsoft 365 Single für regulär 99 € pro Jahr @word_pricing.
-- *Webversion.* Word im Browser ist kostenlos. Wer Abschnittsumbrüche oder ein automatisches Literaturverzeichnis einfügen will, braucht die Desktop-App @word_web_features.
-- *Seitenzahlen ab Kapitel 1.* Abschnittsumbruch einfügen, Fußzeile vom vorigen Abschnitt trennen und die Nummerierung bei 1 starten @word_page_numbering.
-- *Ausfüllbare Vorlagen.* Für Eingabefelder in einer `.dotx` unter Windows erst die Entwicklertools einblenden (Datei → Optionen → Menüband anpassen) @word_templates.
-
+  - 149 € einmalig (Office Home) oder regulär 99 € *pro Jahr* (Microsoft 365 Single) @word_pricing.
+  - Word hat eine Web version... ABER: Abschnittsumbrüche nur am Desktop @word_web_features.
+  - *Seitenzahlen.* Einstellung zu Seitennummerierung unnötig schwer @forum_word_page_numbers @forum_writer_page_numbers.
+  - *Vorlagenpflege.* Geänderte Formatvorlagen je Dokument übernehmen @forum_word_template_styles @writer_template_styles.
+  - *UI Clutter* die UIs sind überladen mit Optionen
+][
+  #figure(caption: [@libreoffice_ui])[
+    #image("/images/libre office toolbar.png", height: 65%)
+  ]
+]
+//- *Preis.* Word für den Desktop gibt es etwa mit Office Home 2024 für einmalig 149 € oder mit Microsoft 365 Single für regulär 99 € pro Jahr @word_pricing.
+//- *Webversion.* Word im Browser ist kostenlos. Wer Abschnittsumbrüche oder ein automatisches Literaturverzeichnis einfügen will, braucht die Desktop-App @word_web_features.
+//- *Seitenzahlen ab Kapitel 1.* Abschnittsumbruch einfügen, Fußzeile vom vorigen Abschnitt trennen und die Nummerierung bei 1 starten
+//- *Ausfüllbare Vorlagen.* Für Eingabefelder in einer `.dotx` unter Windows erst die Entwicklertools einblenden (Datei → Optionen → Menüband anpassen)
 
 == Gibt es nicht schon LaTeX?
 #grid(
@@ -213,6 +239,7 @@ https://de.wikipedia.org/wiki/Typst
 == Syntax
 - leichteres Markdown
 - fühlt sich für Programmierer vertraulicher an
+- text is text und alles was mit mutieren zutun hat ist eine funktion wie man es vom programmieren
 
 Konkret:
 - Content mode
@@ -240,10 +267,10 @@ https://github.com/DM-3/TUBAF_typst_template
 == Typst mit KI
 
 mit typst:
-1357 Tokens -> fast 40% weniger tokens (und auch 2000 character weniger)
+1357 Tokens @KI:tokenizer -> fast 40% weniger tokens (und auch 2000 character weniger)
 
 mit latex:
-2191 Tokens -> ugf 60% mehr tokens als typst
+2191 Tokens @KI:tokenizer -> ugf 60% mehr tokens als typst
 
 #{
   set heading(outlined: false)
