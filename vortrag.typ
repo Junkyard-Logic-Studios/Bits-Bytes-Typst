@@ -1,7 +1,8 @@
 #import "TUBAF_typst_template/tubaf_template.typ" as tubaf
+#import "@preview/simple-plot:1.1.1": plot
 
-//#let theme = "tubaf"
-#let theme = "tud"
+#let theme = "tubaf"
+//#let theme = "tud"
 #if theme not in ("tubaf", "tud") {
   panic("Choose theme=tubaf or theme=tud.")
 }
@@ -103,22 +104,69 @@
 == Gibt es nicht schon LaTeX?
 #grid(
   columns: (4fr, 3fr),
+  column-gutter: 2cm, 
   [
-    Geschichte:
-    - TeX @wiki:TeX
-    - LaTeX @wiki:LaTeX
+    *Donald Knuth 1977: Textsatzsystem TeX* @wiki:TeX
 
-    Nutzung:
-    - lokale Installation, MiKTeX, TeXLive, MacTeX
-    - Overleaf
+      - Formatierung von Texten für die Anzeige, Druck, oder Veröffentlichung
+      - Makrosprache _TeX_
 
-    -> LaTeX ist alt und hat einige Schwierigkeiten
+    #v(1em)
+    *Leslie Lamport 1984: LaTeX* @wiki:LaTeX
+
+      - Sammlung an TeX-Makros um die Nutzung von TeX zu vereinfachen
+      - sehr beliebt für wissenschafltiche Arbeiten mit großem Seitenumfang und strengen typografischen Anforderungen
   ],
-  figure(
-    image("images/LaTeX-Word-Graph.svg"),
-    caption: [LaTeX vs Office X; Mühe und Zeitbeanspruchung aufgetragen gegen Komplexität und Größe des Dokuments (Autor: Matthias M. https://commons.wikimedia.org/wiki/File:LaTeX-Word-Graph.svg)],
-  ),
+  {
+    block(stroke: 0.3pt, inset: 5mm, radius: 2mm, width: 100%)[
+      ```tex
+      \documentclass{article}
+      \begin{document}
+      Die Sigmoidfunktion ist eine Aktivierungsfunktion 
+      für neuronale Netzwerke: 
+      \[\sigma(z) = \frac{1}{1 + e^{-z}}\]
+      \end{document}
+      ```
+    ]
+    
+    text(size: 14pt)[#h(1fr) #sym.arrow.b.double #h(1fr)]
+
+    block(stroke: 0.3pt, inset: 5mm, radius: 2mm, width: 100%)[
+      #image("images/latex_demo.png")
+    ]
+  }
 )
+
+#hidden_heading[Gibt es nicht schon LaTeX?]
+#grid(
+  columns: (1fr, 1fr),
+  column-gutter: 2cm
+)[
+  - automatisches Spacing, Silbentrennung, Seitenanordnung 
+  - einfache Eingabe von mathematischen Gleichungen und Formelzeichen
+  - robuste Zählungen, Referenzen und Literaturverweise
+  - Quelldateien in Klartext $->$ einfache Versionsverwaltung und Kollaboration
+  - Stabilität auf großen Dokumenten
+  - tausende Pakete 
+  - kostenlos & open-source @latex_project
+][
+  #plot(
+    width: 9cm,
+    height: 8cm,
+    xmin: 0, xmax: 1,
+    ymin: 0, ymax: 1,
+    xlabel: [Komplexität und Größe des Dokuments],
+    xlabel-anchor: 0,
+    xlabel-offset: (ox: -6.4, oy: -0.2),
+    ylabel: [Mühe & Zeit],
+    show-grid: none,
+    xtick-labels: none,
+    ytick-labels: none,
+    show-origin: false,
+    (fn: x => calc.pow(x, 2) / 1.7 + 0.25, stroke: blue + 1.5pt, label: [LaTeX], label-pos: 0.75, label-side: "below-right"),
+    (fn: x => calc.pow(1.7 * x, 2) + 0.04, stroke: red + 1.5pt, label: [MS Word], label-pos: 0.5, label-side: "east"),
+  )
+]
 
 #hidden_heading[LaTeX-Distributionen]
 *Aktiv gepflegt*
