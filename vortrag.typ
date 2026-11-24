@@ -103,6 +103,7 @@
 )
 #for count in range(1, word-reveals.len() + 1) {
   if theme == "tud" { pagebreak() } else { hidden_heading[Word und seine Spin-offs] }
+  counter(figure.where(kind: image)).update(n => n - 1)
   word-critique
   for overlay in word-reveals.slice(0, count).flatten() {
     place(top + left, dx: overlay.x, dy: overlay.y, rotate(
@@ -135,21 +136,21 @@
 == Gibt es nicht schon LaTeX?
 #grid(
   columns: (4fr, 3fr),
-  column-gutter: 2cm, 
+  column-gutter: 2cm,
   [
     *Donald Knuth 1977: Textsatzsystem TeX* @wiki:TeX
 
-      - Formatierung von Texten für die Anzeige, Druck, oder Veröffentlichung
-      - Makrosprache _TeX_
+    - Formatierung von Texten für die Anzeige, Druck, oder Veröffentlichung
+    - Makrosprache _TeX_
 
     #v(1em)
     *Leslie Lamport 1984: LaTeX* @wiki:LaTeX
 
-      - Sammlung an TeX-Makros um die Nutzung von TeX zu vereinfachen
-      - sehr beliebt für wissenschafltiche Arbeiten mit großem Seitenumfang und strengen typografischen Anforderungen
+    - Sammlung an TeX-Makros um die Nutzung von TeX zu vereinfachen
+    - sehr beliebt für wissenschafltiche Arbeiten mit großem Seitenumfang und strengen typografischen Anforderungen
   ],
   {
-    block(stroke: 0.3pt, inset: 5mm, radius: 2mm, width: 100%)[
+    block(stroke: 0.3pt, inset: if theme == "tubaf" { 5mm } else { 6pt }, radius: 2mm, width: 100%)[
       ```tex
       \documentclass{article}
       \begin{document}
@@ -159,31 +160,35 @@
       \end{document}
       ```
     ]
-    text(size: 14pt)[#h(1fr) #sym.arrow.b.double #h(1fr)]
-    block(stroke: 0.3pt, inset: 5mm, radius: 2mm, width: 100%)[
+
+    text(size: if theme == "tubaf" { 14pt } else { 8pt })[#h(1fr) #sym.arrow.b.double #h(1fr)]
+
+    block(stroke: 0.3pt, inset: if theme == "tubaf" { 5mm } else { 6pt }, radius: 2mm, width: 100%)[
       #image("images/latex_demo.png")
     ]
-  }
+  },
 )
 
 #hidden_heading[Gibt es nicht schon LaTeX?]
 #grid(
   columns: (1fr, 1fr),
-  column-gutter: 2cm
+  column-gutter: if theme == "tubaf" { 2cm } else { 1cm }
 )[
-  - automatisches Spacing, Silbentrennung, Seitenanordnung 
+  - automatisches Spacing, Silbentrennung, Seitenanordnung
   - einfache Eingabe von mathematischen Gleichungen und Formelzeichen
   - robuste Zählungen, Referenzen und Literaturverweise
   - Quelldateien in Klartext $->$ einfache Versionsverwaltung und Kollaboration
   - Stabilität auf großen Dokumenten
-  - tausende Pakete 
+  - tausende Pakete
   - kostenlos & open-source @latex_project
 ][
   #plot(
-    width: 9cm,
-    height: 8cm,
-    xmin: 0, xmax: 1,
-    ymin: 0, ymax: 1,
+    width: if theme == "tubaf" { 9cm } else { 6cm },
+    height: if theme == "tubaf" { 8cm } else { 5cm },
+    xmin: 0,
+    xmax: 1,
+    ymin: 0,
+    ymax: 1,
     xlabel: [Komplexität und Größe des Dokuments],
     xlabel-anchor: 0,
     xlabel-offset: (ox: -6.4, oy: -0.2),
@@ -192,8 +197,20 @@
     xtick-labels: none,
     ytick-labels: none,
     show-origin: false,
-    (fn: x => calc.pow(x, 2) / 1.7 + 0.25, stroke: blue + 1.5pt, label: [LaTeX], label-pos: 0.75, label-side: "below-right"),
-    (fn: x => calc.pow(1.7 * x, 2) + 0.04, stroke: red + 1.5pt, label: [MS Word], label-pos: 0.5, label-side: "east"),
+    (
+      fn: x => calc.pow(x, 2) / 1.7 + 0.25,
+      stroke: blue + 1.5pt,
+      label: image("images/LaTeX_logo.svg.webp", width: 40pt),
+      label-pos: 1.07,
+      label-side: "north",
+    ),
+    (
+      fn: x => calc.pow(1.7 * x, 2) + 0.04,
+      stroke: red + 1.5pt,
+      label: image("images/word icon.png", width: 30pt),
+      label-pos: 0.58,
+      label-side: "north",
+    ),
   )
 ]
 
@@ -260,7 +277,7 @@ proTeXt, teTeX, W32TeX, gwTeX, OzTeX, fpTeX, emTeX, AmigaTeX, PasTeX
   ]
 ]
 
-#hidden_heading[Drei Aufgaben, eine Dateiendung]
+== Drei Aufgaben, eine Dateiendung
 #grid(
   columns: (5fr, 6fr),
   column-gutter: 1.75em,
@@ -296,6 +313,26 @@ proTeXt, teTeX, W32TeX, gwTeX, OzTeX, fpTeX, emTeX, AmigaTeX, PasTeX
   ],
 )
 
+== LaTeX package Problem
+
+Wegen dem design von LaTeX als scriptsamlung auf TeX ist jede funktionalität ein package
+```tex
+\usepackage[left=21mm,right=21mm,top=23mm,bottom=22mm]{geometry}
+\usepackage{amsmath}                 % Aligned equations and named operators
+\usepackage{amsfonts}                % Blackboard-bold symbols
+\usepackage{multicol}                % Two columns below a full-width title
+\usepackage{titlesec}                % Section heading style and spacing
+\usepackage{enumitem}                % List margins and spacing
+\usepackage[table]{xcolor}           % Colors and table support (loads array via colortbl)
+\usepackage{booktabs}                % Table rules
+\usepackage{listings}                % Python syntax highlighting
+\usepackage[style=ieee]{biblatex}    % IEEE citations and bibliography
+\usepackage[hidelinks]{hyperref}     % Linked equation and bibliography references
+```
+
+discussion über tabular packages in latex (sind um die 20)
+https://tex.stackexchange.com/questions/12672/which-tabular-packages-do-which-tasks-and-which-packages-conflict
+
 
 == Vorstellung Typst
 #grid(
@@ -328,9 +365,9 @@ proTeXt, teTeX, W32TeX, gwTeX, OzTeX, fpTeX, emTeX, AmigaTeX, PasTeX
 
 
 == Wie kann ich jetzt Typst benutzen? -- Lokale Installation
-- Anzahl an verschiedenen Installationen
+- Anzahl an verschiedenen Installationen (eine?)
 - Installationsgröße
-- Pakete
+- Pakete durch das typst universe @typst:universe
 - Befehle
 - Tinymist VSCode Extension
 
@@ -338,6 +375,11 @@ proTeXt, teTeX, W32TeX, gwTeX, OzTeX, fpTeX, emTeX, AmigaTeX, PasTeX
 == Performance
 - compile Beispiel an Bachelorarbeit
 - compile Beispiel an Praktikumsbericht
+
+https://www.typetex.app/comparisons/typst-vs-latex-speed
+
+https://www.typetex.app/comparisons/typst-vs-latex
+
 
 
 == Syntax
@@ -368,6 +410,7 @@ https://github.com/DM-3/TUBAF_typst_template
 - overleaf $->$ typst universum
 - github
 - durch git hat man ein mächtiges versionierungssystem und kann änderungen günstig zurücksetzen ohne etwas zu verlieren.
+- vs code um an den datein zu arbeiten und sogar die möglichkeit der live Kollaboration mit der live share extension @vsc_colab
 
 
 == Typst mit KI
