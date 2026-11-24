@@ -159,9 +159,7 @@
       \end{document}
       ```
     ]
-    
     text(size: 14pt)[#h(1fr) #sym.arrow.b.double #h(1fr)]
-
     block(stroke: 0.3pt, inset: 5mm, radius: 2mm, width: 100%)[
       #image("images/latex_demo.png")
     ]
@@ -300,12 +298,33 @@ proTeXt, teTeX, W32TeX, gwTeX, OzTeX, fpTeX, emTeX, AmigaTeX, PasTeX
 
 
 == Vorstellung Typst
-ganz kurz Geschichte
+#grid(
+  columns: (4fr, 3fr),
+  column-gutter: 2cm
+)[
+*Laurenz Mädje und Martin Haug:* @wiki:Typst
 
-https://de.wikipedia.org/wiki/Typst
-
-- entwickelt von...
-- die machen ihr Geld mit der online Version (Freemium)
+- ab 2019 Entwicklung von Typst im Rahmen ihrer Masterarbeit an der TU Berlin
+- Markup-basiertes Textsatzsystem zum Schreiben und Formatieren wissenschaftlicher Texte
+- #link("https://github.com/typst/typst")[Compiler] geschrieben in Rust 
+  - seit 2023 open-source
+  - schnelles, inkrementelles Kompilieren
+- seit 2023 weiterentwickelt durch Typst GmbH
+  - Hauptprodukt ist die WEB-IDE #link("https://typst.app/")[_\"Typst App\"_] (Freemium)
+][#{
+      block(stroke: 0.3pt, inset: 5mm, radius: 2mm, width: 100%)[
+      ```typst
+      #set page(paper: "a4")
+      #set text(size: 14pt)
+      Die Sigmoidfunktion ist eine Aktivierungsfunktion für neuronale Netzwerke:
+      $ sigma(z) = 1 / (1 + e^(-z)) $
+      ```
+    ]
+    text(size: 14pt)[#h(1fr) #sym.arrow.b.double #h(1fr)]
+    block(stroke: 0.3pt, inset: 5mm, radius: 2mm, width: 100%)[
+      #image("images/latex_demo.png")
+    ]
+}]
 
 
 == Wie kann ich jetzt Typst benutzen? -- Lokale Installation
@@ -359,8 +378,30 @@ mit typst:
 mit latex:
 2191 Tokens @KI:tokenizer -> ugf 60% mehr tokens als typst
 
+
+== Zusammenfassung
+#plot(
+  width: 9cm,
+  height: 8cm,
+  xmin: 0, xmax: 1,
+  ymin: 0, ymax: 1,
+  xlabel: [Komplexität und Größe des Dokuments],
+  xlabel-anchor: 0,
+  xlabel-offset: (ox: -6.4, oy: -0.2),
+  ylabel: [Mühe & Zeit],
+  show-grid: none,
+  xtick-labels: none,
+  ytick-labels: none,
+  show-origin: false,
+  (fn: x => calc.pow(x, 2) / 3.1 + 0.17, stroke: green + 1.5pt, label: image("images/Typst.svg.webp", height: 7mm), label-pos: 0.75, label-side: "below-right"),
+  (fn: x => calc.pow(x, 2) / 1.7 + 0.25, stroke: blue + 1.5pt, label: [LaTeX], label-pos: 0.75, label-side: "below-right"),
+  (fn: x => calc.pow(1.7 * x, 2) + 0.04, stroke: red + 1.5pt, label: [MS Word], label-pos: 0.5, label-side: "east"),
+)
+
+
 #{
   set heading(outlined: false)
   show heading.where(level: 1): it => heading(level: 2, it.body, outlined: true)
+  set text(size: 11pt)
   bibliography("references.bib", title: "Quellen")
 }
