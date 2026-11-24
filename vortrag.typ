@@ -1,7 +1,7 @@
 #import "TUBAF_typst_template/tubaf_template.typ" as tubaf
 
-// #let theme = "tubaf" 
-#let theme = "tud"
+#let theme = "tubaf" 
+// #let theme = "tud"
 #if theme not in ("tubaf", "tud") {
   panic("Choose theme=tubaf or theme=tud.")
 }
@@ -52,8 +52,8 @@
   columns: (4fr, 3fr),
   [
     Geschichte:
-    - TeX https://de.wikipedia.org/wiki/TeX
-    - LaTeX https://de.wikipedia.org/wiki/LaTeX
+    - TeX @wiki:TeX
+    - LaTeX @wiki:LaTeX
 
     Nutzung:
     - lokale Installation, MiKTeX, TeXLive, MacTeX
@@ -191,3 +191,9 @@ mit typst:
 
 mit latex:
 2191 Tokens -> ugf 60% mehr tokens als typst
+
+#{
+  set heading(outlined: false)
+  show heading.where(level: 1): it => heading(level: 2, it.body, outlined: true)
+  bibliography("references.bib", title: "Quellen")
+}
