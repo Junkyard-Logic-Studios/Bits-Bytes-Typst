@@ -1,6 +1,7 @@
 #import "TUBAF_typst_template/tubaf_template.typ" as tubaf
 
-#let theme = "tubaf" //"tud" //
+// #let theme = "tubaf" 
+#let theme = "tud"
 #if theme not in ("tubaf", "tud") {
   panic("Choose theme=tubaf or theme=tud.")
 }
@@ -19,8 +20,6 @@
   tud.tud-deck(title: talk-title, author: speakers, lang: "de")[
     #tud.title-slide-6(title: talk-title, overline: talk-subtitle, extras: speaker-names)[]
 
-    // Top-level headings have slide content in this deck and belong in the agenda.
-    #show heading.where(level: 1): it => heading(level: 2, outlined: false, it.body)
     #body
   ]
 } else {
@@ -36,17 +35,19 @@
   ]
 }
 
-#outline(depth: 1)
+#let hidden_heading(it) = heading(level: 2, outlined: false, it)
+
+#outline(depth: 2)
 
 
 
-= Was ist das Problem?
+== Was ist das Problem?
 - Wir wollen Textdokumente erstellen (Bachelorarbeit und co...)
 - Word ist doof
   -> Latex?
 
 
-= Gibt es nicht schon LaTeX?
+== Gibt es nicht schon LaTeX?
 #grid(
   columns: (4fr, 3fr),
   [
@@ -66,7 +67,7 @@
   ),
 )
 
-== LaTeX-Distributionen
+#hidden_heading[LaTeX-Distributionen]
 *Aktiv gepflegt*
 - *TeX Live* für Linux, macOS und Windows
 - *MiKTeX* mit automatischer Nachinstallation fehlender Pakete
@@ -79,7 +80,7 @@ proTeXt, teTeX, W32TeX, gwTeX, OzTeX, fpTeX, emTeX, AmigaTeX, PasTeX
 
 [Inset grosses Fragezeichen weil wft warum so viele meinungen das sollte doch möglichst einfach zu nutzen sein????]
 
-==
+#hidden_heading[]
 #let comparison-height = if theme == "tud" { 72mm } else { 100% }
 #place(top + left, dy: if theme == "tud" { 0mm } else { -10mm })[
   #grid(
@@ -97,7 +98,7 @@ proTeXt, teTeX, W32TeX, gwTeX, OzTeX, fpTeX, emTeX, AmigaTeX, PasTeX
 ]
 
 
-== Drei Aufgaben, eine Dateiendung
+#hidden_heading[Drei Aufgaben, eine Dateiendung]
 #grid(
   columns: (5fr, 6fr),
   column-gutter: 1.75em,
@@ -134,7 +135,7 @@ proTeXt, teTeX, W32TeX, gwTeX, OzTeX, fpTeX, emTeX, AmigaTeX, PasTeX
 )
 
 
-= Vorstellung Typst
+== Vorstellung Typst
 ganz kurz Geschichte
 
 https://de.wikipedia.org/wiki/Typst
@@ -143,7 +144,7 @@ https://de.wikipedia.org/wiki/Typst
 - die machen ihr Geld mit der online Version (Freemium)
 
 
-= Wie kann ich jetzt Typst benutzen? -- Lokale Installation
+== Wie kann ich jetzt Typst benutzen? -- Lokale Installation
 - Anzahl an verschiedenen Installationen
 - Installationsgröße
 - Pakete
@@ -151,12 +152,12 @@ https://de.wikipedia.org/wiki/Typst
 - Tinymist VSCode Extension
 
 
-= Performance
+== Performance
 - compile Beispiel an Bachelorarbeit
 - compile Beispiel an Praktikumsbericht
 
 
-= Syntax
+== Syntax
 - leichteres Markdown
 - fühlt sich für Programmierer vertraulicher an
 
@@ -167,23 +168,23 @@ Konkret:
 
 
 
-= Figuren -- Referenzen -- tolle Pakete
+== Figuren -- Referenzen -- tolle Pakete
 
 
-= Vorlagen
-== TUD
+== Vorlagen
+#hidden_heading[TUD]
 https://github.com/ShadowPaint-SP/TUD-typst-template.git
-== TUBAF
+#hidden_heading[TUBAF]
 https://github.com/DM-3/TUBAF_typst_template
 
 
-= Kollaboration / Versionierung
+== Kollaboration / Versionierung
 - overleaf $->$ typst universum
 - github
 - durch git hat man ein mächtiges versionierungssystem und kann änderungen günstig zurücksetzen ohne etwas zu verlieren.
 
 
-= Typst mit KI
+== Typst mit KI
 
 mit typst:
 1357 Tokens -> fast 40% weniger tokens (und auch 2000 character weniger)
