@@ -329,6 +329,8 @@ Wegen dem design von LaTeX als scriptsamlung auf TeX ist jede funktionalität ei
 \usepackage[style=ieee]{biblatex}    % IEEE citations and bibliography
 \usepackage[hidelinks]{hyperref}     % Linked equation and bibliography references
 ```
+
+discussion über tabular packages in latex (sind um die 20)
 https://tex.stackexchange.com/questions/12672/which-tabular-packages-do-which-tasks-and-which-packages-conflict
 
 
@@ -352,6 +354,11 @@ https://de.wikipedia.org/wiki/Typst
 == Performance
 - compile Beispiel an Bachelorarbeit
 - compile Beispiel an Praktikumsbericht
+
+https://www.typetex.app/comparisons/typst-vs-latex-speed
+
+https://www.typetex.app/comparisons/typst-vs-latex
+
 
 
 == Syntax
