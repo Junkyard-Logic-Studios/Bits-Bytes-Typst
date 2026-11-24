@@ -103,6 +103,7 @@
 )
 #for count in range(1, word-reveals.len() + 1) {
   if theme == "tud" { pagebreak() } else { hidden_heading[Word und seine Spin-offs] }
+  counter(figure.where(kind: image)).update(n => n - 1)
   word-critique
   for overlay in word-reveals.slice(0, count).flatten() {
     place(top + left, dx: overlay.x, dy: overlay.y, rotate(
@@ -149,7 +150,7 @@
     - sehr beliebt für wissenschafltiche Arbeiten mit großem Seitenumfang und strengen typografischen Anforderungen
   ],
   {
-    block(stroke: 0.3pt, inset: 5mm, radius: 2mm, width: 100%)[
+    block(stroke: 0.3pt, inset: if theme == "tubaf" { 5mm } else { 6pt }, radius: 2mm, width: 100%)[
       ```tex
       \documentclass{article}
       \begin{document}
@@ -160,9 +161,9 @@
       ```
     ]
 
-    text(size: 14pt)[#h(1fr) #sym.arrow.b.double #h(1fr)]
+    text(size: if theme == "tubaf" { 14pt } else { 8pt })[#h(1fr) #sym.arrow.b.double #h(1fr)]
 
-    block(stroke: 0.3pt, inset: 5mm, radius: 2mm, width: 100%)[
+    block(stroke: 0.3pt, inset: if theme == "tubaf" { 5mm } else { 6pt }, radius: 2mm, width: 100%)[
       #image("images/latex_demo.png")
     ]
   },
@@ -171,7 +172,7 @@
 #hidden_heading[Gibt es nicht schon LaTeX?]
 #grid(
   columns: (1fr, 1fr),
-  column-gutter: 2cm
+  column-gutter: if theme == "tubaf" { 2cm } else { 1cm }
 )[
   - automatisches Spacing, Silbentrennung, Seitenanordnung
   - einfache Eingabe von mathematischen Gleichungen und Formelzeichen
@@ -182,8 +183,8 @@
   - kostenlos & open-source @latex_project
 ][
   #plot(
-    width: 9cm,
-    height: 8cm,
+    width: if theme == "tubaf" { 9cm } else { 6cm },
+    height: if theme == "tubaf" { 8cm } else { 5cm },
     xmin: 0,
     xmax: 1,
     ymin: 0,
@@ -276,7 +277,7 @@ proTeXt, teTeX, W32TeX, gwTeX, OzTeX, fpTeX, emTeX, AmigaTeX, PasTeX
   ]
 ]
 
-#hidden_heading[Drei Aufgaben, eine Dateiendung]
+== Drei Aufgaben, eine Dateiendung
 #grid(
   columns: (5fr, 6fr),
   column-gutter: 1.75em,
@@ -312,6 +313,24 @@ proTeXt, teTeX, W32TeX, gwTeX, OzTeX, fpTeX, emTeX, AmigaTeX, PasTeX
   ],
 )
 
+== LaTeX package Problem
+
+Wegen dem design von LaTeX als scriptsamlung auf TeX ist jede funktionalität ein package
+```tex
+\usepackage[left=21mm,right=21mm,top=23mm,bottom=22mm]{geometry}
+\usepackage{amsmath}                 % Aligned equations and named operators
+\usepackage{amsfonts}                % Blackboard-bold symbols
+\usepackage{multicol}                % Two columns below a full-width title
+\usepackage{titlesec}                % Section heading style and spacing
+\usepackage{enumitem}                % List margins and spacing
+\usepackage[table]{xcolor}           % Colors and table support (loads array via colortbl)
+\usepackage{booktabs}                % Table rules
+\usepackage{listings}                % Python syntax highlighting
+\usepackage[style=ieee]{biblatex}    % IEEE citations and bibliography
+\usepackage[hidelinks]{hyperref}     % Linked equation and bibliography references
+```
+https://tex.stackexchange.com/questions/12672/which-tabular-packages-do-which-tasks-and-which-packages-conflict
+
 
 == Vorstellung Typst
 ganz kurz Geschichte
@@ -323,9 +342,9 @@ https://de.wikipedia.org/wiki/Typst
 
 
 == Wie kann ich jetzt Typst benutzen? -- Lokale Installation
-- Anzahl an verschiedenen Installationen
+- Anzahl an verschiedenen Installationen (eine?)
 - Installationsgröße
-- Pakete
+- Pakete durch das typst universe @typst:universe
 - Befehle
 - Tinymist VSCode Extension
 
@@ -363,6 +382,7 @@ https://github.com/DM-3/TUBAF_typst_template
 - overleaf $->$ typst universum
 - github
 - durch git hat man ein mächtiges versionierungssystem und kann änderungen günstig zurücksetzen ohne etwas zu verlieren.
+- vs code um an den datein zu arbeiten und sogar die möglichkeit der live Kollaboration mit der live share extension @vsc_colab
 
 
 == Typst mit KI
