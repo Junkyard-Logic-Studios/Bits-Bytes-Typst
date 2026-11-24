@@ -1,7 +1,7 @@
 #import "TUBAF_typst_template/tubaf_template.typ" as tubaf
 
-#let theme = "tubaf" 
-// #let theme = "tud"
+//#let theme = "tubaf"
+#let theme = "tud"
 #if theme not in ("tubaf", "tud") {
   panic("Choose theme=tubaf or theme=tud.")
 }
@@ -42,9 +42,62 @@
 
 
 == Was ist das Problem?
-- Wir wollen Textdokumente erstellen (Bachelorarbeit und co...)
-- Word ist doof
-  -> Latex?
+
+- Erstellen von größeren Textdokumenten
+- Formatvorlagen für gleichmäßiges styling
+- Kollaboration mit mehreren Autoren... auf mehreren Geräten
+
+#hidden_heading([Was ist das Problem?])
+
+- Erstellen von größeren Textdokumenten
+- Formatvorlagen für gleichmäßiges styling
+- Kollaboration mit mehreren Autoren... auf mehreren Geräten
+
+#place(bottom + center, dy: -50pt)[
+  #text(size: 20pt)[Gibt es nicht schon Word?]
+]
+
+== Word und seine Spin-offs
+#let word-critique = place(
+  top + left,
+  dy: if theme == "tud" { 4em } else { 3.25em },
+  grid(columns: (1fr, 1fr), column-gutter: 1em)[
+    - Direkt auf der Seite schreiben und das Layout sofort sehen.
+    - Formatvorlagen anwenden, Bilder und Tabellen per Klick einfügen und bewegen.
+    - Dokumente gemeinsam überarbeiten, kommentieren und Änderungen nachverfolgen.
+  ][#figure(caption: [Word im Browser])[
+    #image("images/word_ui.png", height: 75%)
+  ]],
+)
+#word-critique
+
+// Each frame adds one comment. Keep positions fixed so the earlier comments stay put.
+#let word-comments = (
+  (file: "word_lizenz.png", x: 1em, y: 7em, width: 100%, angle: 10deg),
+  (file: "Wordhate/image.png", x: 16em, y: 12.4em, width: 28em, angle: -6deg),
+  (file: "Wordhate/image copy.png", x: 1em, y: 11em, width: 12.6em, angle: 8deg),
+  (file: "Wordhate/image copy 2.png", x: 2.2em, y: 16.4em, width: 29.3em, angle: 4deg),
+  (file: "Wordhate/image copy 3.png", x: 13.2em, y: 7.8em, width: 31em, angle: -4.5deg),
+  (file: "Wordhate/image copy 4.png", x: 1.6em, y: 3.5em, width: 33em, angle: 3deg),
+  (file: "Wordhate/image copy 5.png", x: 12.7em, y: 19.5em, width: 27em, angle: -3deg),
+)
+#for count in range(1, word-comments.len() + 1) {
+  if theme == "tud" { pagebreak() } else { hidden_heading[Wo Word umständlich wird] }
+  word-critique
+  for comment in word-comments.slice(0, count) {
+    place(top + left, dx: comment.x, dy: comment.y, rotate(
+      comment.angle,
+      image("images/" + comment.file, width: comment.width),
+    ))
+  }
+  place(bottom + right)[#text(size: 7pt)[@reddit:word_hate_1,@reddit:word_hate_2,@word_lizenz]]
+}
+#hidden_heading([Word und seine Spin-offs])
+
+- *Preis.* Word für den Desktop gibt es etwa mit Office Home 2024 für einmalig 149 € oder mit Microsoft 365 Single für regulär 99 € pro Jahr @word_pricing.
+- *Webversion.* Word im Browser ist kostenlos. Wer Abschnittsumbrüche oder ein automatisches Literaturverzeichnis einfügen will, braucht die Desktop-App @word_web_features.
+- *Seitenzahlen ab Kapitel 1.* Abschnittsumbruch einfügen, Fußzeile vom vorigen Abschnitt trennen und die Nummerierung bei 1 starten @word_page_numbering.
+- *Ausfüllbare Vorlagen.* Für Eingabefelder in einer `.dotx` unter Windows erst die Entwicklertools einblenden (Datei → Optionen → Menüband anpassen) @word_templates.
 
 
 == Gibt es nicht schon LaTeX?
