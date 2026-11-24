@@ -135,18 +135,18 @@
 == Gibt es nicht schon LaTeX?
 #grid(
   columns: (4fr, 3fr),
-  column-gutter: 2cm, 
+  column-gutter: 2cm,
   [
     *Donald Knuth 1977: Textsatzsystem TeX* @wiki:TeX
 
-      - Formatierung von Texten für die Anzeige, Druck, oder Veröffentlichung
-      - Makrosprache _TeX_
+    - Formatierung von Texten für die Anzeige, Druck, oder Veröffentlichung
+    - Makrosprache _TeX_
 
     #v(1em)
     *Leslie Lamport 1984: LaTeX* @wiki:LaTeX
 
-      - Sammlung an TeX-Makros um die Nutzung von TeX zu vereinfachen
-      - sehr beliebt für wissenschafltiche Arbeiten mit großem Seitenumfang und strengen typografischen Anforderungen
+    - Sammlung an TeX-Makros um die Nutzung von TeX zu vereinfachen
+    - sehr beliebt für wissenschafltiche Arbeiten mit großem Seitenumfang und strengen typografischen Anforderungen
   ],
   {
     block(stroke: 0.3pt, inset: 5mm, radius: 2mm, width: 100%)[
@@ -159,13 +159,13 @@
       \end{document}
       ```
     ]
-    
+
     text(size: 14pt)[#h(1fr) #sym.arrow.b.double #h(1fr)]
 
     block(stroke: 0.3pt, inset: 5mm, radius: 2mm, width: 100%)[
       #image("images/latex_demo.png")
     ]
-  }
+  },
 )
 
 #hidden_heading[Gibt es nicht schon LaTeX?]
@@ -173,19 +173,21 @@
   columns: (1fr, 1fr),
   column-gutter: 2cm
 )[
-  - automatisches Spacing, Silbentrennung, Seitenanordnung 
+  - automatisches Spacing, Silbentrennung, Seitenanordnung
   - einfache Eingabe von mathematischen Gleichungen und Formelzeichen
   - robuste Zählungen, Referenzen und Literaturverweise
   - Quelldateien in Klartext $->$ einfache Versionsverwaltung und Kollaboration
   - Stabilität auf großen Dokumenten
-  - tausende Pakete 
+  - tausende Pakete
   - kostenlos & open-source @latex_project
 ][
   #plot(
     width: 9cm,
     height: 8cm,
-    xmin: 0, xmax: 1,
-    ymin: 0, ymax: 1,
+    xmin: 0,
+    xmax: 1,
+    ymin: 0,
+    ymax: 1,
     xlabel: [Komplexität und Größe des Dokuments],
     xlabel-anchor: 0,
     xlabel-offset: (ox: -6.4, oy: -0.2),
@@ -194,8 +196,20 @@
     xtick-labels: none,
     ytick-labels: none,
     show-origin: false,
-    (fn: x => calc.pow(x, 2) / 1.7 + 0.25, stroke: blue + 1.5pt, label: [LaTeX], label-pos: 0.75, label-side: "below-right"),
-    (fn: x => calc.pow(1.7 * x, 2) + 0.04, stroke: red + 1.5pt, label: [MS Word], label-pos: 0.5, label-side: "east"),
+    (
+      fn: x => calc.pow(x, 2) / 1.7 + 0.25,
+      stroke: blue + 1.5pt,
+      label: image("images/LaTeX_logo.svg.webp", width: 40pt),
+      label-pos: 1.07,
+      label-side: "north",
+    ),
+    (
+      fn: x => calc.pow(1.7 * x, 2) + 0.04,
+      stroke: red + 1.5pt,
+      label: image("images/word icon.png", width: 30pt),
+      label-pos: 0.58,
+      label-side: "north",
+    ),
   )
 ]
 
