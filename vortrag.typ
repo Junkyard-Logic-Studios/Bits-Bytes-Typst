@@ -1,7 +1,7 @@
 #import "TUBAF_typst_template/tubaf_template.typ" as tubaf
 
-#let theme = "tubaf"
-//#let theme = "tud"
+//#let theme = "tubaf"
+#let theme = "tud"
 #if theme not in ("tubaf", "tud") {
   panic("Choose theme=tubaf or theme=tud.")
 }
@@ -175,7 +175,39 @@ proTeXt, teTeX, W32TeX, gwTeX, OzTeX, fpTeX, emTeX, AmigaTeX, PasTeX
     ]
   ]
 ]
-
+#hidden_heading[]
+#let comparison-height = if theme == "tud" { 72mm } else { 100% }
+#place(top + left, dy: if theme == "tud" { 0mm } else { -10mm })[
+  #grid(
+    columns: (1fr, 1fr),
+    align: center,
+  )[
+    #block(stroke: 1pt)[
+      #image("comparison/latex.pdf", height: comparison-height)
+    ]
+  ][
+    #block(stroke: 1pt)[
+      #image("comparison/typst.pdf", height: comparison-height)
+    ]
+  ]
+]
+#place(center + horizon)[#text(size: 50pt)[Was ist was?]]
+#hidden_heading[]
+#let comparison-height = if theme == "tud" { 72mm } else { 100% }
+#place(top + left, dy: if theme == "tud" { 0mm } else { -10mm })[
+  #grid(
+    columns: (1fr, 1fr),
+    align: center,
+  )[
+    #block(stroke: 1pt)[
+      #image("comparison/latex.pdf", height: comparison-height)
+    ]
+  ][
+    #block(stroke: 1pt + green)[
+      #image("comparison/typst.pdf", height: comparison-height)
+    ]
+  ]
+]
 
 #hidden_heading[Drei Aufgaben, eine Dateiendung]
 #grid(
