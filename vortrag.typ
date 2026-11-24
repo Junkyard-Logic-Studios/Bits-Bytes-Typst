@@ -17,7 +17,12 @@
 #let speaker-names = [Martin Werner - Richard Voigtmann]
 
 #show: body => if theme == "tud" {
-  tud.tud-deck(title: talk-title, author: speakers, lang: "de")[
+  tud.tud-deck(
+    title: talk-title,
+    author: speakers,
+    lang: "de",
+    partner-logo: image("TUBAF_typst_template/logos/TUBAF_Logo_blau.svg", height: 5.2mm),
+  )[
     #tud.title-slide-6(title: talk-title, overline: talk-subtitle, extras: speaker-names)[]
 
     #body
@@ -278,7 +283,9 @@ Konkret:
 - Code mode
 - Math mode
 
+== Limits
 
+- das tyeing system ist noch sehr ausbaufähig
 
 == Figuren -- Referenzen -- tolle Pakete
 
