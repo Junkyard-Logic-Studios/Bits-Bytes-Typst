@@ -43,6 +43,8 @@
 
 #let hidden_heading(it) = heading(level: 2, outlined: false, it)
 
+
+
 #outline(depth: 2)
 
 
@@ -62,6 +64,8 @@
 #place(bottom + center, dy: -50pt)[
   #text(size: 20pt)[Gibt es nicht schon Word?]
 ]
+
+
 
 == Word und seine Spin-offs
 #let word-critique = place(
@@ -115,8 +119,13 @@
     size: 9pt,
   )[@reddit:word_hate_1,@reddit:word_hate_2,@reddit:word_hate_3,@word_lizenz]]
 }
+
+
 #hidden_heading([Word und seine Spin-offs])
-#grid(columns: (45%, 1fr))[
+#grid(
+  columns: (45%, 1fr),
+  column-gutter: 1cm
+)[
 
   - 149 € einmalig (Office Home) oder regulär 99 € *pro Jahr* (Microsoft 365 Single) @word_pricing.
   - Word hat eine Web version... ABER: Abschnittsumbrüche nur am Desktop @word_web_features.
@@ -125,7 +134,9 @@
   - *UI Clutter* die UIs sind überladen mit Optionen
 ][
   #figure(caption: [@libreoffice_ui])[
-    #image("/images/libre office toolbar.png", height: 65%)
+    #block(stroke: 0.3pt)[
+      #image("/images/libre office toolbar.png", height: 65%)
+    ]
   ]
 ]
 //- *Preis.* Word für den Desktop gibt es etwa mit Office Home 2024 für einmalig 149 € oder mit Microsoft 365 Single für regulär 99 € pro Jahr @word_pricing.
@@ -133,10 +144,12 @@
 //- *Seitenzahlen ab Kapitel 1.* Abschnittsumbruch einfügen, Fußzeile vom vorigen Abschnitt trennen und die Nummerierung bei 1 starten
 //- *Ausfüllbare Vorlagen.* Für Eingabefelder in einer `.dotx` unter Windows erst die Entwicklertools einblenden (Datei → Optionen → Menüband anpassen)
 
+
+
 == Gibt es nicht schon LaTeX?
 #grid(
   columns: (4fr, 3fr),
-  column-gutter: 2cm,
+  column-gutter: 3em,
   [
     *Donald Knuth 1977: Textsatzsystem TeX* @wiki:TeX
 
@@ -168,6 +181,8 @@
     ]
   },
 )
+
+
 
 #hidden_heading[Gibt es nicht schon LaTeX?]
 #grid(
@@ -214,6 +229,8 @@
   )
 ]
 
+
+
 #hidden_heading[LaTeX-Distributionen]
 *Aktiv gepflegt*
 - *TeX Live* für Linux, macOS und Windows
@@ -243,6 +260,7 @@ proTeXt, teTeX, W32TeX, gwTeX, OzTeX, fpTeX, emTeX, AmigaTeX, PasTeX
     ]
   ]
 ]
+
 #hidden_heading[]
 #let comparison-height = if theme == "tud" { 72mm } else { 100% }
 #place(top + left, dy: if theme == "tud" { 0mm } else { -10mm })[
@@ -260,6 +278,7 @@ proTeXt, teTeX, W32TeX, gwTeX, OzTeX, fpTeX, emTeX, AmigaTeX, PasTeX
   ]
 ]
 #place(center + horizon)[#text(size: 50pt)[Was ist was?]]
+
 #hidden_heading[]
 #let comparison-height = if theme == "tud" { 72mm } else { 100% }
 #place(top + left, dy: if theme == "tud" { 0mm } else { -10mm })[
@@ -277,7 +296,49 @@ proTeXt, teTeX, W32TeX, gwTeX, OzTeX, fpTeX, emTeX, AmigaTeX, PasTeX
   ]
 ]
 
-== Drei Aufgaben, eine Dateiendung
+
+
+== Vorstellung Typst
+#grid(
+  columns: (4fr, 3fr),
+  column-gutter: 3em
+)[
+*Laurenz Mädje und Martin Haug:* @wiki:Typst
+
+- ab 2019 Entwicklung von Typst im Rahmen ihrer Masterarbeit an der TU Berlin
+- Markup-basiertes Textsatzsystem zum Schreiben und Formatieren wissenschaftlicher Texte
+- #link("https://github.com/typst/typst")[Compiler] geschrieben in Rust 
+  - seit 2023 open-source
+  - schnelles, inkrementelles Kompilieren
+- seit 2023 weiterentwickelt durch Typst GmbH
+  - Hauptprodukt ist die WEB-IDE #link("https://typst.app/")[_\"Typst App\"_] (Freemium)
+][#{
+    block(stroke: 0.3pt, inset: 5mm, radius: 2mm, width: 100%)[
+      ```typst
+      #set page(paper: "a4")
+      #set text(size: 14pt)
+      Die Sigmoidfunktion ist eine Aktivierungsfunktion für neuronale Netzwerke:
+      $ sigma(z) = 1 / (1 + e^(-z)) $
+      ```
+    ]
+    text(size: if theme == "tubaf" { 14pt } else { 8pt })[#h(1fr) #sym.arrow.b.double #h(1fr)]
+    block(stroke: 0.3pt, inset: 5mm, radius: 2mm, width: 100%)[
+      #image("images/latex_demo.png")
+    ]
+}]
+
+
+
+== Wie kann ich jetzt Typst benutzen? -- Lokale Installation
+- Anzahl an verschiedenen Installationen (eine?)
+- Installationsgröße
+- Pakete durch das typst universe @typst:universe
+- Befehle
+- Tinymist VSCode Extension
+
+
+
+#hidden_heading[Drei Aufgaben, eine Dateiendung]
 #grid(
   columns: (5fr, 6fr),
   column-gutter: 1.75em,
@@ -313,7 +374,9 @@ proTeXt, teTeX, W32TeX, gwTeX, OzTeX, fpTeX, emTeX, AmigaTeX, PasTeX
   ],
 )
 
-== LaTeX package Problem
+
+
+#hidden_heading[LaTeX package Problem]
 
 Wegen dem design von LaTeX als scriptsamlung auf TeX ist jede funktionalität ein package
 ```tex
@@ -333,43 +396,6 @@ Wegen dem design von LaTeX als scriptsamlung auf TeX ist jede funktionalität ei
 discussion über tabular packages in latex (sind um die 20)
 https://tex.stackexchange.com/questions/12672/which-tabular-packages-do-which-tasks-and-which-packages-conflict
 
-
-== Vorstellung Typst
-#grid(
-  columns: (4fr, 3fr),
-  column-gutter: 2cm
-)[
-*Laurenz Mädje und Martin Haug:* @wiki:Typst
-
-- ab 2019 Entwicklung von Typst im Rahmen ihrer Masterarbeit an der TU Berlin
-- Markup-basiertes Textsatzsystem zum Schreiben und Formatieren wissenschaftlicher Texte
-- #link("https://github.com/typst/typst")[Compiler] geschrieben in Rust 
-  - seit 2023 open-source
-  - schnelles, inkrementelles Kompilieren
-- seit 2023 weiterentwickelt durch Typst GmbH
-  - Hauptprodukt ist die WEB-IDE #link("https://typst.app/")[_\"Typst App\"_] (Freemium)
-][#{
-      block(stroke: 0.3pt, inset: 5mm, radius: 2mm, width: 100%)[
-      ```typst
-      #set page(paper: "a4")
-      #set text(size: 14pt)
-      Die Sigmoidfunktion ist eine Aktivierungsfunktion für neuronale Netzwerke:
-      $ sigma(z) = 1 / (1 + e^(-z)) $
-      ```
-    ]
-    text(size: 14pt)[#h(1fr) #sym.arrow.b.double #h(1fr)]
-    block(stroke: 0.3pt, inset: 5mm, radius: 2mm, width: 100%)[
-      #image("images/latex_demo.png")
-    ]
-}]
-
-
-== Wie kann ich jetzt Typst benutzen? -- Lokale Installation
-- Anzahl an verschiedenen Installationen (eine?)
-- Installationsgröße
-- Pakete durch das typst universe @typst:universe
-- Befehle
-- Tinymist VSCode Extension
 
 
 == Performance
@@ -392,11 +418,18 @@ Konkret:
 - Code mode
 - Math mode
 
-== Limits
 
-- das tyeing system ist noch sehr ausbaufähig
 
-== Figuren -- Referenzen -- tolle Pakete
+#hidden_heading[Figuren]
+
+
+
+#hidden_heading[Referenzen]
+
+
+
+#hidden_heading[tolle Pakete]
+
 
 
 == Vorlagen
@@ -406,11 +439,19 @@ https://github.com/ShadowPaint-SP/TUD-typst-template.git
 https://github.com/DM-3/TUBAF_typst_template
 
 
+
 == Kollaboration / Versionierung
 - overleaf $->$ typst universum
 - github
 - durch git hat man ein mächtiges versionierungssystem und kann änderungen günstig zurücksetzen ohne etwas zu verlieren.
 - vs code um an den datein zu arbeiten und sogar die möglichkeit der live Kollaboration mit der live share extension @vsc_colab
+
+
+
+== Limits
+
+- das tyeing system ist noch sehr ausbaufähig
+
 
 
 == Typst mit KI
@@ -422,12 +463,15 @@ mit latex:
 2191 Tokens @KI:tokenizer -> ugf 60% mehr tokens als typst
 
 
+
 == Zusammenfassung
 #plot(
-  width: 9cm,
-  height: 8cm,
-  xmin: 0, xmax: 1,
-  ymin: 0, ymax: 1,
+  width: if theme == "tubaf" { 9cm } else { 6cm },
+  height: if theme == "tubaf" { 8cm } else { 5cm },
+  xmin: 0,
+  xmax: 1,
+  ymin: 0,
+  ymax: 1,
   xlabel: [Komplexität und Größe des Dokuments],
   xlabel-anchor: 0,
   xlabel-offset: (ox: -6.4, oy: -0.2),
@@ -436,15 +480,34 @@ mit latex:
   xtick-labels: none,
   ytick-labels: none,
   show-origin: false,
-  (fn: x => calc.pow(x, 2) / 3.1 + 0.17, stroke: green + 1.5pt, label: image("images/Typst.svg.webp", height: 7mm), label-pos: 0.75, label-side: "below-right"),
-  (fn: x => calc.pow(x, 2) / 1.7 + 0.25, stroke: blue + 1.5pt, label: [LaTeX], label-pos: 0.75, label-side: "below-right"),
-  (fn: x => calc.pow(1.7 * x, 2) + 0.04, stroke: red + 1.5pt, label: [MS Word], label-pos: 0.5, label-side: "east"),
+  (
+    fn: x => calc.pow(x, 2) / 3.1 + 0.17, 
+    stroke: green + 1.5pt, 
+    label: image("images/Typst.svg.webp", height: 7mm), 
+    label-pos: 0.75, 
+    label-side: "below-right"
+  ),
+  (
+    fn: x => calc.pow(x, 2) / 1.7 + 0.25,
+    stroke: blue + 1.5pt,
+    label: image("images/LaTeX_logo.svg.webp", width: 40pt),
+    label-pos: 1.07,
+    label-side: "north",
+  ),
+  (
+    fn: x => calc.pow(1.7 * x, 2) + 0.04,
+    stroke: red + 1.5pt,
+    label: image("images/word icon.png", width: 30pt),
+    label-pos: 0.58,
+    label-side: "north",
+  ),
 )
+
 
 
 #{
   set heading(outlined: false)
   show heading.where(level: 1): it => heading(level: 2, it.body, outlined: true)
-  set text(size: 11pt)
+  set text(size: tubaf.sizes.small)
   bibliography("references.bib", title: "Quellen")
 }
