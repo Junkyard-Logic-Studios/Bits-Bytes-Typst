@@ -242,7 +242,7 @@
 *Historisch* \
 proTeXt, teTeX, W32TeX, gwTeX, OzTeX, fpTeX, emTeX, AmigaTeX, PasTeX
 
-[Inset grosses Fragezeichen weil wft warum so viele meinungen das sollte doch möglichst einfach zu nutzen sein????]
+#place(right + top, dy: 40pt)[#text(size: 150pt, fill: red)[?]]
 
 #hidden_heading[]
 #let comparison-height = if theme == "tud" { 72mm } else { 100% }
