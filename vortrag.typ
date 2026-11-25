@@ -311,7 +311,7 @@ proTeXt, teTeX, W32TeX, gwTeX, OzTeX, fpTeX, emTeX, AmigaTeX, PasTeX
     - seit 2023 open-source
     - schnelles, inkrementelles Kompilieren
   - seit 2023 weiterentwickelt durch Typst GmbH
-    - Hauptprodukt ist die WEB-IDE #link("https://typst.app/")[_\"Typst App\"_] (Freemium)
+    - Hauptprodukt ist die Web-IDE #link("https://typst.app/")[_\"Typst App\"_] (Freemium)
 ][#{
   block(stroke: 0.3pt, inset: 5mm, radius: 2mm, width: 100%)[
     ```typst
@@ -329,17 +329,25 @@ proTeXt, teTeX, W32TeX, gwTeX, OzTeX, fpTeX, emTeX, AmigaTeX, PasTeX
 
 
 
-== Wie kann ich jetzt Typst benutzen? -- Lokale Installation
+== Wie kann ich jetzt Typst benutzen?
+Statt der Web-IDE bietet sich vor allem die lokale Installation des Typst-Compilers an.
 
-#place(top + right, dy: 20pt)[#image("images/qrcode.png", width: 80pt)]
-#box(stroke: 1pt, radius: 4pt, inset: 4pt)[Wir laden ein zum mitmachen!]
-
-- Anzahl an verschiedenen Installationen (eine?)
-- Installationsgröße
-- Pakete durch das typst universe @typst:universe
-- Befehle
+- Installationsgröße in Größenordnung 50-60 MB
+- Command-Line Interface
 - Tinymist VSCode Extension
+- Pakete durch das typst universe @typst:universe
 
+#hidden_heading[Wie kann ich jetzt Typst benutzen?]
+#place(bottom + right, dy: -13%)[#image("images/qrcode.png", width: 34%)]
+Statt der Web-IDE bietet sich vor allem die lokale Installation des Typst-Compilers an.
+
+- Installationsgröße in Größenordnung 50-60 MB
+- Command-Line Interface
+- Tinymist VSCode Extension
+- Pakete durch das typst universe @typst:universe
+
+#v(10%)
+#h(15%) #box(stroke: 0.7pt, radius: 0.4em, inset: 1em)[Wir laden ein zum mitmachen!]
 
 
 #hidden_heading[Drei Aufgaben, eine Dateiendung]
