@@ -393,20 +393,20 @@ Statt der Web-IDE bietet sich vor allem die lokale Installation des Typst-Compil
 Wegen dem design von LaTeX als scriptsamlung auf TeX ist jede funktionalität ein package
 ```tex
 \usepackage[left=21mm,right=21mm,top=23mm,bottom=22mm]{geometry}
-\usepackage{amsmath}                 % Aligned equations and named operators
-\usepackage{amsfonts}                % Blackboard-bold symbols
-\usepackage{multicol}                % Two columns below a full-width title
-\usepackage{titlesec}                % Section heading style and spacing
-\usepackage{enumitem}                % List margins and spacing
-\usepackage[table]{xcolor}           % Colors and table support (loads array via colortbl)
-\usepackage{booktabs}                % Table rules
-\usepackage{listings}                % Python syntax highlighting
-\usepackage[style=ieee]{biblatex}    % IEEE citations and bibliography
-\usepackage[hidelinks]{hyperref}     % Linked equation and bibliography references
+\usepackage{amsmath}                 % Ausgerichtete Gleichungen und benannte Operatoren
+\usepackage{amsfonts}                % Doppelstrichsymbole wie ℝ und ℕ
+\usepackage{multicol}                % Zwei Spalten unter einem Titel über die ganze Breite
+\usepackage{titlesec}                % Gestaltung und Abstände von Abschnittsüberschriften
+\usepackage{enumitem}                % Einzüge und Abstände in Listen
+\usepackage[table]{xcolor}           % Farben und Tabellenunterstützung (lädt array über colortbl)
+\usepackage{booktabs}                % Tabellenlinien
+\usepackage{listings}                % Syntaxhervorhebung für Python
+\usepackage[style=ieee]{biblatex}    % Zitate und Literaturverzeichnis im IEEE-Stil
+\usepackage[hidelinks]{hyperref}     % Verlinkte Gleichungs- und Literaturverweise
 ```
+#hidden_heading[LaTeX package Problem]
 
-discussion über tabular packages in latex (sind um die 20)
-https://tex.stackexchange.com/questions/12672/which-tabular-packages-do-which-tasks-and-which-packages-conflict
+#figure({ image("images/latex_package_problem.png") }, caption: [Tabellen pakete in latex @tex:forum_packages])
 
 
 
@@ -414,9 +414,12 @@ https://tex.stackexchange.com/questions/12672/which-tabular-packages-do-which-ta
 - compile Beispiel an Bachelorarbeit
 - compile Beispiel an Praktikumsbericht
 
-https://www.typetex.app/comparisons/typst-vs-latex-speed
-
-https://www.typetex.app/comparisons/typst-vs-latex
+#figure(
+  box(radius: 4pt, clip: true)[
+    #image("images/typtex_speed_comp.png")
+  ],
+  caption: [LaTeX vs Typst compile comparison @typtex:speed],
+)
 
 
 
