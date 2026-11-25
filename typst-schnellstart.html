@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Typst-Schnellstart · Bits &amp; Bytes</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: system-ui, sans-serif;
+      line-height: 1.55;
+      background: #000;
+      color: #fff;
+    }
+    body { margin: 0; }
+    main { max-width: 44rem; margin: auto; padding: 1.5rem clamp(1rem, 4vw, 2rem) 2.5rem; }
+    h1 { font-size: clamp(1.65rem, 5vw, 2.25rem); line-height: 1.18; margin: 0 0 .5rem; }
+    h2 { font-size: 1.2rem; margin: 0 0 .6rem; }
+    p, ul, ol { margin: .5rem 0; }
+    ul, ol { padding-left: 1.25rem; }
+    li + li { margin-top: .3rem; }
+    section { border-top: 1px solid #333; margin-top: 1.3rem; padding-top: 1rem; }
+    a { color: #a9deff; text-underline-offset: .16em; }
+    header p, .hint, .link-note { color: #c5c5c5; }
+    details { margin-top: .5rem; border: 1px solid #373737; border-radius: .35rem; padding: .5rem .75rem; }
+    summary { cursor: pointer; font-weight: 650; }
+    .platform-picker { margin-top: 1rem; }
+    select {
+      margin-left: .5rem;
+      padding: .3rem .55rem;
+      color: inherit;
+      background: #171717;
+      border: 1px solid #666;
+      border-radius: .25rem;
+      font: inherit;
+    }
+    fieldset { border: 0; margin: 0; padding: 0; }
+    legend { padding: 0; }
+    .tool-options { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .5rem; }
+    .tool-options label { position: relative; cursor: pointer; }
+    .tool-choice {
+      display: inline-flex;
+      align-items: center;
+      min-height: 2.75rem;
+      box-sizing: border-box;
+      padding: .35rem .8rem;
+      border: 1px solid #555;
+      border-radius: .55rem;
+      background: #171717;
+      color: #e6e6e6;
+      font-size: .9rem;
+      font-weight: 650;
+      white-space: nowrap;
+    }
+    .tool-options label:hover .tool-choice { border-color: #a9deff; }
+    .tool-options input:checked + .tool-choice {
+      border-color: #a9deff;
+      background: #102333;
+      color: #dbf0ff;
+    }
+    .tool-options input:focus-visible + .tool-choice { outline: 2px solid #a9deff; outline-offset: 3px; }
+    #platform-installs[data-enhanced] details { border: 0; margin: 0; padding: 0; }
+    #platform-installs[data-enhanced] summary { display: none; }
+    .command { position: relative; margin: .65rem 0; }
+    pre { margin: 0; background: #171717; border-radius: .35rem; padding: .7rem .8rem; overflow-x: auto; font-size: .875rem; }
+    code, kbd { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; }
+    .command:has(button) pre { padding-top: 2.5rem; }
+    button {
+      position: absolute;
+      inset: .35rem .4rem auto auto;
+      font: inherit;
+      font-size: .8rem;
+      color: #fff;
+      background: #252525;
+      border: 1px solid #666;
+      border-radius: .25rem;
+      padding: .25rem .55rem;
+      cursor: pointer;
+    }
+    button:hover { background: #404040; }
+    :focus-visible { outline: 2px solid #a9deff; outline-offset: 3px; }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Typst-Schnellstart</h1>
+      <p>Typst und VS Code einrichten und den ersten Bericht oder Foliensatz mit der TUBAF-Vorlage als PDF erstellen.</p>
+      <div class="platform-picker" id="platform-picker" hidden>
+        <label for="platform">Betriebssystem</label>
+        <select id="platform">
+          <option value="windows">Windows</option>
+          <option value="macos">macOS</option>
+          <option value="ubuntu">Linux (Ubuntu)</option>
+        </select>
+      </div>
+    </header>
+
+    <section>
+      <h2>1. Typst, Git und VS Code installieren</h2>
+      <noscript><p>Öffne den Abschnitt für dein Betriebssystem und kopiere die Befehle für die Programme, die du brauchst.</p></noscript>
+      <fieldset id="install-tools" hidden>
+        <legend>Was möchtest du installieren?</legend>
+        <div class="tool-options">
+          <label>
+            <input class="sr-only" type="checkbox" value="typst" checked>
+            <span class="tool-choice">Typst</span>
+          </label>
+          <label>
+            <input class="sr-only" type="checkbox" value="git">
+            <span class="tool-choice">Git</span>
+          </label>
+          <label>
+            <input class="sr-only" type="checkbox" value="vscode">
+            <span class="tool-choice">VS Code</span>
+          </label>
+        </div>
+      </fieldset>
+      <p class="hint" id="install-empty" hidden>Wähle mindestens ein Programm aus.</p>
+
+      <div id="platform-installs">
+        <details data-platform="windows">
+          <summary>Windows · PowerShell</summary>
+          <div class="command" data-label="Installation unter Windows"><pre><code><span data-tool="typst">winget install --id Typst.Typst --exact</span>
+<span data-tool="git">winget install --id Git.Git --exact</span>
+<span data-tool="vscode">winget install --id Microsoft.VisualStudioCode --exact</span></code></pre></div>
+          <p class="hint">Führe die Befehle in PowerShell aus und öffne PowerShell danach neu.</p>
+        </details>
+
+        <details data-platform="macos">
+          <summary>macOS · Terminal mit Homebrew</summary>
+          <div class="command" data-label="Installation unter macOS"><pre><code><span data-tool="typst">brew install typst</span>
+<span data-tool="git">brew install git</span>
+<span data-tool="vscode">brew install --cask visual-studio-code</span></code></pre></div>
+          <p class="hint">Falls <code>brew</code> fehlt, folge zuerst der <a href="https://brew.sh/">Homebrew-Anleitung</a>.</p>
+        </details>
+
+        <details data-platform="ubuntu">
+          <summary>Linux · Ubuntu mit Snap</summary>
+          <div class="command" data-label="Installation unter Ubuntu"><pre><code><span data-tool="typst">sudo snap install typst</span>
+<span data-tool="git">sudo apt update
+sudo apt install git</span>
+<span data-tool="vscode">sudo snap install --classic code</span></code></pre></div>
+          <p class="hint">Andere Distributionen: <a href="https://typst.app/open-source/">Typst</a>, <a href="https://git-scm.com/install/linux">Git</a> und <a href="https://code.visualstudio.com/docs/setup/linux">VS Code</a> bieten weitere Installationswege.</p>
+        </details>
+      </div>
+    </section>
+
+    <section>
+      <h2>2. Tinymist in VS Code installieren</h2>
+      <div class="command" data-label="Tinymist installieren"><pre><code>code --install-extension myriad-dreamin.tinymist</code></pre></div>
+      <p class="hint">Falls <code>code</code> fehlt, öffne VS Code und installiere <strong>Tinymist Typst</strong> über die Erweiterungsansicht. Auf dem Mac kannst du den Terminal-Befehl über die Befehlspalette mit <a href="https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line">Shell Command: Install 'code' … in PATH</a> aktivieren.</p>
+    </section>
+
+    <section>
+      <h2>3. TUBAF-Vorlage klonen und ausprobieren</h2>
+      <p>Wechsle im Terminal in den Ordner, in dem dein Projekt liegen soll.</p>
+      <div class="command" data-label="TUBAF-Vorlage klonen und öffnen"><pre><code>git clone https://github.com/DM-3/TUBAF_typst_template.git
+cd TUBAF_typst_template
+code .</code></pre></div>
+      <ol>
+        <li>Öffne <code>example-report.typ</code> für einen Bericht oder <code>example-presentation.typ</code> für Folien. Wenn <code>code .</code> fehlt, öffne den Ordner über <strong>Datei → Ordner öffnen</strong>.</li>
+        <li>Öffne die Befehlspalette mit <kbd>Strg</kbd>+<kbd>Umschalt</kbd>+<kbd>P</kbd> (macOS <kbd>⌘</kbd>+<kbd>⇧</kbd>+<kbd>P</kbd>) und suche nach <strong>Typst Preview:</strong>, um die Live-Vorschau zu starten.</li>
+        <li>Ändere oben im <code>#show</code>-Block Titel und Namen. Schreibe unter der ersten Überschrift deinen eigenen Text. Lass die Beispieldatei, <code>tubaf_template.typ</code> und den Ordner <code>logos</code> zusammen.</li>
+      </ol>
+      <p>Für das PDF führe im geklonten Ordner den passenden Befehl aus.</p>
+      <div class="command" data-label="Bericht als PDF erstellen"><pre><code>typst compile example-report.typ bericht.pdf</code></pre></div>
+      <div class="command" data-label="Folien als PDF erstellen"><pre><code>typst compile example-presentation.typ folien.pdf</code></pre></div>
+      <p class="hint">Beim ersten Kompilieren braucht Typst Internet für die Pakete. Die Vorlage ist inoffiziell. Gleiche sie für Abgaben mit den Vorgaben deines Instituts ab.</p>
+    </section>
+
+    <section>
+      <h2>Zum Nachschlagen</h2>
+      <ul>
+        <li><a href="https://typst.app/docs/tutorial/">Typst-Tutorial</a> <span class="link-note">· Schreiben und formatieren lernen</span></li>
+        <li><a href="https://typst.app/docs/reference/">Typst-Dokumentation</a> <span class="link-note">· Syntax und Funktionen</span></li>
+        <li><a href="https://typst.app/universe/">Typst Universe</a> <span class="link-note">· Pakete und Vorlagen</span></li>
+        <li><a href="https://forum.typst.app/">Typst-Forum</a> <span class="link-note">· Fragen und Beispiele</span></li>
+        <li><a href="https://marketplace.visualstudio.com/items/?itemName=myriad-dreamin.tinymist">Tinymist Typst</a> <span class="link-note">· VS-Code-Erweiterung</span></li>
+        <li><a href="https://github.com/DM-3/TUBAF_typst_template">TUBAF-Vorlage auf GitHub</a> <span class="link-note">· Quellcode und Beispiele</span></li>
+      </ul>
+    </section>
+    <div class="sr-only" role="status" id="copy-status"></div>
+  </main>
+  <script>
+    const platform = document.getElementById('platform');
+    const installTools = document.getElementById('install-tools');
+    const platformInstalls = document.getElementById('platform-installs');
+    const installEmpty = document.getElementById('install-empty');
+    const toolChoices = Array.from(installTools.querySelectorAll('input'));
+    const installPanels = Array.from(platformInstalls.querySelectorAll('details')).map((panel) => ({
+      panel,
+      code: panel.querySelector('.command code'),
+      commands: Object.fromEntries(Array.from(panel.querySelectorAll('[data-tool]'), (command) => [
+        command.dataset.tool,
+        command.textContent,
+      ])),
+    }));
+
+    function updateInstallCommands() {
+      const selected = toolChoices.filter((choice) => choice.checked).map((choice) => choice.value);
+      installEmpty.hidden = selected.length > 0;
+
+      for (const { panel, code, commands } of installPanels) {
+        panel.hidden = panel.dataset.platform !== platform.value || selected.length === 0;
+        code.textContent = selected.map((tool) => commands[tool]).join('\n');
+      }
+    }
+
+    for (const { panel } of installPanels) {
+      panel.open = true;
+    }
+    platformInstalls.dataset.enhanced = '';
+    updateInstallCommands();
+    platform.addEventListener('change', updateInstallCommands);
+    installTools.addEventListener('change', updateInstallCommands);
+    document.getElementById('platform-picker').hidden = false;
+    installTools.hidden = false;
+
+    const copyStatus = document.getElementById('copy-status');
+    for (const block of document.querySelectorAll('.command')) {
+      const code = block.querySelector('code');
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.textContent = 'Kopieren';
+      button.setAttribute('aria-label', 'Kopieren: ' + block.dataset.label);
+      button.addEventListener('click', async () => {
+        clearTimeout(button.feedbackTimer);
+        try {
+          await navigator.clipboard.writeText(code.textContent.trim());
+          copyStatus.textContent = 'Kopiert. ' + block.dataset.label;
+          button.textContent = 'Kopiert';
+        } catch {
+          const range = document.createRange();
+          range.selectNodeContents(code);
+          const selection = window.getSelection();
+          selection.removeAllRanges();
+          selection.addRange(range);
+          copyStatus.textContent = 'Befehl markiert. Mit Strg+C oder Befehl+C kopieren.';
+          button.textContent = 'Markiert';
+        }
+        button.feedbackTimer = setTimeout(() => { button.textContent = 'Kopieren'; }, 1800);
+      });
+      block.append(button);
+    }
+  </script>
+</body>
+</html>

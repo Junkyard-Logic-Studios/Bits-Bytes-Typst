@@ -2,7 +2,7 @@
 #import "@preview/simple-plot:1.1.1": plot
 
 #let theme = "tubaf"
-//#let theme = "tud"
+#let theme = "tud"
 #if theme not in ("tubaf", "tud") {
   panic("Choose theme=tubaf or theme=tud.")
 }
@@ -303,33 +303,37 @@ proTeXt, teTeX, W32TeX, gwTeX, OzTeX, fpTeX, emTeX, AmigaTeX, PasTeX
   columns: (4fr, 3fr),
   column-gutter: 3em
 )[
-*Laurenz Mädje und Martin Haug:* @wiki:Typst
+  *Laurenz Mädje und Martin Haug:* @wiki:Typst
 
-- ab 2019 Entwicklung von Typst im Rahmen ihrer Masterarbeit an der TU Berlin
-- Markup-basiertes Textsatzsystem zum Schreiben und Formatieren wissenschaftlicher Texte
-- #link("https://github.com/typst/typst")[Compiler] geschrieben in Rust 
-  - seit 2023 open-source
-  - schnelles, inkrementelles Kompilieren
-- seit 2023 weiterentwickelt durch Typst GmbH
-  - Hauptprodukt ist die WEB-IDE #link("https://typst.app/")[_\"Typst App\"_] (Freemium)
+  - ab 2019 Entwicklung von Typst im Rahmen ihrer Masterarbeit an der TU Berlin
+  - Markup-basiertes Textsatzsystem zum Schreiben und Formatieren wissenschaftlicher Texte
+  - #link("https://github.com/typst/typst")[Compiler] geschrieben in Rust
+    - seit 2023 open-source
+    - schnelles, inkrementelles Kompilieren
+  - seit 2023 weiterentwickelt durch Typst GmbH
+    - Hauptprodukt ist die WEB-IDE #link("https://typst.app/")[_\"Typst App\"_] (Freemium)
 ][#{
-    block(stroke: 0.3pt, inset: 5mm, radius: 2mm, width: 100%)[
-      ```typst
-      #set page(paper: "a4")
-      #set text(size: 14pt)
-      Die Sigmoidfunktion ist eine Aktivierungsfunktion für neuronale Netzwerke:
-      $ sigma(z) = 1 / (1 + e^(-z)) $
-      ```
-    ]
-    text(size: if theme == "tubaf" { 14pt } else { 8pt })[#h(1fr) #sym.arrow.b.double #h(1fr)]
-    block(stroke: 0.3pt, inset: 5mm, radius: 2mm, width: 100%)[
-      #image("images/latex_demo.png")
-    ]
+  block(stroke: 0.3pt, inset: 5mm, radius: 2mm, width: 100%)[
+    ```typst
+    #set page(paper: "a4")
+    #set text(size: 14pt)
+    Die Sigmoidfunktion ist eine Aktivierungsfunktion für neuronale Netzwerke:
+    $ sigma(z) = 1 / (1 + e^(-z)) $
+    ```
+  ]
+  text(size: if theme == "tubaf" { 14pt } else { 8pt })[#h(1fr) #sym.arrow.b.double #h(1fr)]
+  block(stroke: 0.3pt, inset: 5mm, radius: 2mm, width: 100%)[
+    #image("images/latex_demo.png")
+  ]
 }]
 
 
 
 == Wie kann ich jetzt Typst benutzen? -- Lokale Installation
+
+#place(top + right, dy: 20pt)[#image("images/qrcode.png", width: 80pt)]
+#box(stroke: 1pt, radius: 4pt, inset: 4pt)[Wir laden ein zum mitmachen!]
+
 - Anzahl an verschiedenen Installationen (eine?)
 - Installationsgröße
 - Pakete durch das typst universe @typst:universe
@@ -451,6 +455,7 @@ https://github.com/DM-3/TUBAF_typst_template
 == Limits
 
 - das tyeing system ist noch sehr ausbaufähig
+- wird in science papern meist nicht akzeptiert da diese oft nur Latex akzeptieren und den source code wollen. (aber auch hier gibt es langsam änderungen @github:tracl )
 
 
 
@@ -481,11 +486,11 @@ mit latex:
   ytick-labels: none,
   show-origin: false,
   (
-    fn: x => calc.pow(x, 2) / 3.1 + 0.17, 
-    stroke: green + 1.5pt, 
-    label: image("images/Typst.svg.webp", height: 7mm), 
-    label-pos: 0.75, 
-    label-side: "below-right"
+    fn: x => calc.pow(x, 2) / 3.1 + 0.17,
+    stroke: green + 1.5pt,
+    label: image("images/Typst.svg.webp", height: 7mm),
+    label-pos: 0.75,
+    label-side: "below-right",
   ),
   (
     fn: x => calc.pow(x, 2) / 1.7 + 0.25,
