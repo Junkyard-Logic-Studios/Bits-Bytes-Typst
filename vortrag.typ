@@ -244,6 +244,44 @@ proTeXt, teTeX, W32TeX, gwTeX, OzTeX, fpTeX, emTeX, AmigaTeX, PasTeX
 
 #place(right + top, dy: 40pt)[#text(size: 150pt, fill: red)[?]]
 
+
+#hidden_heading[LaTeX package Problem]
+
+Wegen dem design von LaTeX als scriptsamlung auf TeX ist jede funktionalität ein package
+```tex
+\usepackage[left=21mm,right=21mm,top=23mm,bottom=22mm]{geometry}
+\usepackage{amsmath}                 % Ausgerichtete Gleichungen und benannte Operatoren
+\usepackage{amsfonts}                % Doppelstrichsymbole wie ℝ und ℕ
+\usepackage{multicol}                % Zwei Spalten unter einem Titel über die ganze Breite
+\usepackage{titlesec}                % Gestaltung und Abstände von Abschnittsüberschriften
+\usepackage{enumitem}                % Einzüge und Abstände in Listen
+\usepackage[table]{xcolor}           % Farben und Tabellenunterstützung (lädt array über colortbl)
+\usepackage{booktabs}                % Tabellenlinien
+\usepackage{listings}                % Syntaxhervorhebung für Python
+\usepackage[style=ieee]{biblatex}    % Zitate und Literaturverzeichnis im IEEE-Stil
+\usepackage[hidelinks]{hyperref}     % Verlinkte Gleichungs- und Literaturverweise
+```
+#hidden_heading[LaTeX package Problem]
+
+#figure({ image("images/latex_package_problem.png") }, caption: [Tabellen pakete in latex @tex:forum_packages])
+
+
+#hidden_heading[LaTeX Beschwerden]
+- steile Lernkurve
+- gewöhnungsbedürftige Syntax
+- Unübersichtlichkeit von Distributionen und Paketen
+- kryptische Fehlermeldungen (insbesondere durch eingebundene Bibliotheken)
+- Kampf mit Layout / Anordnung (z.B. floating Elemente)
+- langsames Kompilieren (+ Compile-limits bei Online-Editoren)
+
+#v(1fr)
+#align(center, tubaf._create-box("", [
+LaTeX hat einige Nachteile und Probleme, aber:
+
+Wie auch immer eine Alternative aussehen mag\ -- zunächst muss das Ergebnis gleich gut sein!
+], color.yellow.lighten(70%), color.yellow.darken(90%), color.yellow.darken(10%)))
+#v(2fr)
+
 #hidden_heading[]
 #let comparison-height = if theme == "tud" { 72mm } else { 100% }
 #place(top + left, dy: if theme == "tud" { 0mm } else { -10mm })[
@@ -338,7 +376,7 @@ Statt der Web-IDE bietet sich vor allem die lokale Installation des Typst-Compil
 - Pakete durch das typst universe @typst:universe
 
 #hidden_heading[Wie kann ich jetzt Typst benutzen?]
-#place(bottom + right, dy: -13%)[#image("images/qrcode.png", width: 34%)]
+#place(bottom + right, dy: -10%)[#image("images/qrcode.png", width: 34%)]
 Statt der Web-IDE bietet sich vor allem die lokale Installation des Typst-Compilers an.
 
 - Installationsgröße in Größenordnung 50-60 MB
@@ -346,8 +384,7 @@ Statt der Web-IDE bietet sich vor allem die lokale Installation des Typst-Compil
 - Tinymist VSCode Extension
 - Pakete durch das typst universe @typst:universe
 
-#v(10%)
-#h(15%) #box(stroke: 0.7pt, radius: 0.4em, inset: 1em)[Wir laden ein zum mitmachen!]
+#place(bottom + left, dy: -26%, dx: 13%)[#tubaf._create-box("", [Wir laden ein zum mitmachen!], color.green.lighten(80%), color.green.darken(80%), color.green.darken(20%))]
 
 
 #hidden_heading[Drei Aufgaben, eine Dateiendung]
@@ -387,31 +424,9 @@ Statt der Web-IDE bietet sich vor allem die lokale Installation des Typst-Compil
 )
 
 
-
-#hidden_heading[LaTeX package Problem]
-
-Wegen dem design von LaTeX als scriptsamlung auf TeX ist jede funktionalität ein package
-```tex
-\usepackage[left=21mm,right=21mm,top=23mm,bottom=22mm]{geometry}
-\usepackage{amsmath}                 % Ausgerichtete Gleichungen und benannte Operatoren
-\usepackage{amsfonts}                % Doppelstrichsymbole wie ℝ und ℕ
-\usepackage{multicol}                % Zwei Spalten unter einem Titel über die ganze Breite
-\usepackage{titlesec}                % Gestaltung und Abstände von Abschnittsüberschriften
-\usepackage{enumitem}                % Einzüge und Abstände in Listen
-\usepackage[table]{xcolor}           % Farben und Tabellenunterstützung (lädt array über colortbl)
-\usepackage{booktabs}                % Tabellenlinien
-\usepackage{listings}                % Syntaxhervorhebung für Python
-\usepackage[style=ieee]{biblatex}    % Zitate und Literaturverzeichnis im IEEE-Stil
-\usepackage[hidelinks]{hyperref}     % Verlinkte Gleichungs- und Literaturverweise
-```
-#hidden_heading[LaTeX package Problem]
-
-#figure({ image("images/latex_package_problem.png") }, caption: [Tabellen pakete in latex @tex:forum_packages])
-
-
-
 == Performance
 - compile Beispiel an Bachelorarbeit
+
 - compile Beispiel an Praktikumsbericht
 
 #figure(
@@ -426,7 +441,8 @@ Wegen dem design von LaTeX als scriptsamlung auf TeX ist jede funktionalität ei
 == Syntax
 - leichteres Markdown
 - fühlt sich für Programmierer vertraulicher an
-- text is text und alles was mit mutieren zutun hat ist eine funktion wie man es vom programmieren
+- text is text und alles was mit mutieren zutun hat ist eine funktion wie man es vom programmieren kennt
+
 
 Konkret:
 - Content mode
@@ -437,22 +453,59 @@ Konkret:
 
 #hidden_heading[Figuren]
 
+#grid(
+  columns: 2,
+  column-gutter: 3em,
+)[
+  *Bilder:*
+```typ
+  #figure(
+    image("Pfad/zu/meinem/Bild.png"),
+    caption: "Ein wichtiges Bild"
+  )
+```
+][
+  *Tabellen:*
+```typ
+  #figure(
+    table(
+      columns: 3,
+      "a", "b", "c",
+      "1", "2", "3",
+    ),
+    caption: "Eine wichtige Tabelle"
+  )
+```
+]
+*Automatische Verzeichnisse:*
+```typ
+  #outline(title: "Abbildungsverzeichnis", target: figure.where(kind: image))
+  #outline(title: "Tabellenverzeichnis", target: figure.where(kind: table))
+```
 
 
 #hidden_heading[Referenzen]
+#block(width: 65.5%)[
 
+Einbinden von Literaturverzeichnissen über:
+```typ
+  #bibliography("references.bib", style: "ieee")
+```
 
+Eigene Abschnitte, Figuren, oder Formeln mit Labeln versehen:
+```typ
+  = Grundlagen <Abschnitt_Grundlagen>
+  $ a^2 + b^2 = c^2 $ <Satz_des_Pythagoras>
+```
+
+Zitationen und Referenzen im Text:
+```typ
+  Die Formeln für geometrische Zusammenhänge sind in  @Abschnitt_Grundlagen aufgeführt. Zur Berechnung der Längen im Dreieck kann @Satz_des_Pythagoras verwendet werden.
+```
+]
 
 #hidden_heading[tolle Pakete]
-
-
-
-== Vorlagen
-#hidden_heading[TUD]
-https://github.com/ShadowPaint-SP/TUD-typst-template.git
-#hidden_heading[TUBAF]
-https://github.com/DM-3/TUBAF_typst_template
-
+- cetz: Erstellen von Zeichnungen, ähnlich zu TikZ
 
 
 == Kollaboration / Versionierung
@@ -462,10 +515,38 @@ https://github.com/DM-3/TUBAF_typst_template
 - vs code um an den datein zu arbeiten und sogar die möglichkeit der live Kollaboration mit der live share extension @vsc_colab
 
 
+== Vorlagen
+#show link: set text(fill: color.blue.darken(10%))
+#grid(
+  columns: (1fr, 1fr),
+  column-gutter: 1em,
+  box(stroke: 0.7pt, radius: 0.4em, inset: 1em, width: 100%, height: 70%)[
+    *TUD*
+    
+    #underline[TUD-typst-template #link("https://github.com/ShadowPaint-SP/TUD-typst-template")[(Github #math.arrow.tr)]]
+
+    - Abschlussarbeiten
+
+    #underline[tud-presentation-template #link("https://github.com/ShadowPaint-SP/tud-presentation-template")[(Github #math.arrow.tr)]]
+
+    - Präsentation
+    - Vorlesungsskripte
+    - offiziell anerkannt
+  ],
+  box(stroke: 0.7pt, radius: 0.4em, inset: 1em, width: 100%, height: 70%)[
+    *TUBAF*
+
+    #underline[TUBAF_typst_template #link("https://github.com/DM-3/TUBAF_typst_template")[(Github #math.arrow.tr)]]
+
+    - Belegarbeiten
+    - Präsentationen
+  ]
+)
+
 
 == Limits
 
-- das tyeing system ist noch sehr ausbaufähig
+- das typing system ist noch sehr ausbaufähig
 - wird in science papern meist nicht akzeptiert da diese oft nur Latex akzeptieren und den source code wollen. (aber auch hier gibt es langsam änderungen @github:tracl )
 
 
