@@ -24,7 +24,7 @@
     lang: "de",
     partner-logo: image("TUBAF_typst_template/logos/TUBAF_Logo_blau.svg", height: 5.2mm),
   )[
-    #tud.title-slide-6(title: talk-title, overline: talk-subtitle, extras: speaker-names)[]
+    #tud.title-slide-6(title: talk-title, overline: talk-subtitle, extras: speaker-names)
 
     #body
   ]
@@ -275,11 +275,17 @@ Wegen dem design von LaTeX als scriptsamlung auf TeX ist jede funktionalität ei
 - langsames Kompilieren (+ Compile-limits bei Online-Editoren)
 
 #v(1fr)
-#align(center, tubaf._create-box("", [
-LaTeX hat einige Nachteile und Probleme, aber:
+#align(center, tubaf._create-box(
+  "",
+  [
+    LaTeX hat einige Nachteile und Probleme, aber:
 
-Wie auch immer eine Alternative aussehen mag\ -- zunächst muss das Ergebnis gleich gut sein!
-], color.yellow.lighten(70%), color.yellow.darken(90%), color.yellow.darken(10%)))
+    Wie auch immer eine Alternative aussehen mag\ -- zunächst muss das Ergebnis gleich gut sein!
+  ],
+  color.yellow.lighten(70%),
+  color.yellow.darken(90%),
+  color.yellow.darken(10%),
+))
 #v(2fr)
 
 #hidden_heading[]
@@ -384,7 +390,13 @@ Statt der Web-IDE bietet sich vor allem die lokale Installation des Typst-Compil
 - Tinymist VSCode Extension
 - Pakete durch das typst universe @typst:universe
 
-#place(bottom + left, dy: -26%, dx: 13%)[#tubaf._create-box("", [Wir laden ein zum mitmachen!], color.green.lighten(80%), color.green.darken(80%), color.green.darken(20%))]
+#place(bottom + left, dy: -26%, dx: 13%)[#tubaf._create-box(
+  "",
+  [Wir laden ein zum mitmachen!],
+  color.green.lighten(80%),
+  color.green.darken(80%),
+  color.green.darken(20%),
+)]
 
 
 #hidden_heading[Drei Aufgaben, eine Dateiendung]
@@ -419,19 +431,13 @@ Statt der Web-IDE bietet sich vor allem die lokale Installation des Typst-Compil
     #show: tubaf.presentation
     #tubaf.tip(lang: "de")[Ein Hinweis]
     ```
-
   ],
 )
 
-
 == Performance
-- compile Beispiel an Bachelorarbeit
-
-- compile Beispiel an Praktikumsbericht
-
 #figure(
   box(radius: 4pt, clip: true)[
-    #image("images/typtex_speed_comp.png")
+    #image("images/typtex_speed_comp.png", width: 86%)
   ],
   caption: [LaTeX vs Typst compile comparison @typtex:speed],
 )
@@ -458,24 +464,24 @@ Konkret:
   column-gutter: 3em,
 )[
   *Bilder:*
-```typ
-  #figure(
-    image("Pfad/zu/meinem/Bild.png"),
-    caption: "Ein wichtiges Bild"
-  )
-```
+  ```typ
+    #figure(
+      image("Pfad/zu/meinem/Bild.png"),
+      caption: "Ein wichtiges Bild"
+    )
+  ```
 ][
   *Tabellen:*
-```typ
-  #figure(
-    table(
-      columns: 3,
-      "a", "b", "c",
-      "1", "2", "3",
-    ),
-    caption: "Eine wichtige Tabelle"
-  )
-```
+  ```typ
+    #figure(
+      table(
+        columns: 3,
+        "a", "b", "c",
+        "1", "2", "3",
+      ),
+      caption: "Eine wichtige Tabelle"
+    )
+  ```
 ]
 *Automatische Verzeichnisse:*
 ```typ
@@ -487,33 +493,73 @@ Konkret:
 #hidden_heading[Referenzen]
 #block(width: 65.5%)[
 
-Einbinden von Literaturverzeichnissen über:
-```typ
-  #bibliography("references.bib", style: "ieee")
-```
+  Einbinden von Literaturverzeichnissen über:
+  ```typ
+    #bibliography("references.bib", style: "ieee")
+  ```
 
-Eigene Abschnitte, Figuren, oder Formeln mit Labeln versehen:
-```typ
-  = Grundlagen <Abschnitt_Grundlagen>
-  $ a^2 + b^2 = c^2 $ <Satz_des_Pythagoras>
-```
+  Eigene Abschnitte, Figuren, oder Formeln mit Labeln versehen:
+  ```typ
+    = Grundlagen <Abschnitt_Grundlagen>
+    $ a^2 + b^2 = c^2 $ <Satz_des_Pythagoras>
+  ```
 
-Zitationen und Referenzen im Text:
-```typ
-  Die Formeln für geometrische Zusammenhänge sind in  @Abschnitt_Grundlagen aufgeführt. Zur Berechnung der Längen im Dreieck kann @Satz_des_Pythagoras verwendet werden.
-```
+  Zitationen und Referenzen im Text:
+  ```typ
+    Die Formeln für geometrische Zusammenhänge sind in  @Abschnitt_Grundlagen aufgeführt. Zur Berechnung der Längen im Dreieck kann @Satz_des_Pythagoras verwendet werden.
+  ```
 ]
 
 #hidden_heading[tolle Pakete]
-- cetz: Erstellen von Zeichnungen, ähnlich zu TikZ
+- *cetz*: Erstellen von Zeichnungen, ähnlich zu TikZ
+- *merman*: Erstellen von allen möglichen arten von SWT Diagrammen
+- *acrostiche*: Abkürzungsverzeichnis
 
+
+Ehrlich gesagt haben wir auch noch nicht mehr nutzen müssen... und wenn man von irgendwas gestört ist kann man ez in die pakete rein gehen und sie selbst umschreiben
 
 == Kollaboration / Versionierung
-- overleaf $->$ typst universum
-- github
-- durch git hat man ein mächtiges versionierungssystem und kann änderungen günstig zurücksetzen ohne etwas zu verlieren.
-- vs code um an den datein zu arbeiten und sogar die möglichkeit der live Kollaboration mit der live share extension @vsc_colab
-
+#grid(
+  columns: (1fr, 1fr),
+  column-gutter: 1em,
+  [
+    Managed Tools:
+    - overleaf in latex
+  ],
+  {
+    image("images/overleaf editor.png", width: 110%)
+  },
+)
+#hidden_heading[Kollaboration / Versionierung]
+#grid(
+  columns: (1fr, 1fr),
+  column-gutter: 1em,
+  [
+    Managed Tools:
+    - overleaf in latex
+    - typst universe
+  ],
+  {
+    image("images/typst editor.png", width: 110%)
+  },
+)
+#hidden_heading[Kollaboration / Versionierung]
+#grid(
+  columns: (2fr, 1fr),
+  column-gutter: 1em,
+  [
+    Managed Tools:
+    - overleaf in latex
+    - typst universe
+    The Holy way:
+    - durch git hat man ein mächtiges versionierungssystem und kann änderungen günstig zurücksetzen ohne etwas zu verlieren.
+    - repositories like: Github, Codeberg, Git.cafe
+    - vs code um an den datein zu arbeiten und sogar die möglichkeit der live Kollaboration mit der live share extension @vsc_colab
+  ],
+  {
+    image("images/spongebob-worship.gif")
+  },
+)
 
 == Vorlagen
 #show link: set text(fill: color.blue.darken(10%))
@@ -522,7 +568,7 @@ Zitationen und Referenzen im Text:
   column-gutter: 1em,
   box(stroke: 0.7pt, radius: 0.4em, inset: 1em, width: 100%, height: 70%)[
     *TUD*
-    
+
     #underline[TUD-typst-template #link("https://github.com/ShadowPaint-SP/TUD-typst-template")[(Github #math.arrow.tr)]]
 
     - Abschlussarbeiten
@@ -540,7 +586,7 @@ Zitationen und Referenzen im Text:
 
     - Belegarbeiten
     - Präsentationen
-  ]
+  ],
 )
 
 
