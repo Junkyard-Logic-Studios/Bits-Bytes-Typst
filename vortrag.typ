@@ -515,8 +515,15 @@ Konkret:
 - *merman*: Erstellen von allen möglichen arten von SWT Diagrammen
 - *acrostiche*: Abkürzungsverzeichnis
 
+#v(10pt)
 
-Ehrlich gesagt haben wir auch noch nicht mehr nutzen müssen... und wenn man von irgendwas gestört ist kann man ez in die pakete rein gehen und sie selbst umschreiben
+#align(center)[#tubaf._create-box(
+  "",
+  [ps.: Ehrlich gesagt braucht man größten teils keine!],
+  color.red.lighten(80%),
+  color.red.darken(80%),
+  color.red.darken(20%),
+)]
 
 == Kollaboration / Versionierung
 #grid(
@@ -553,7 +560,7 @@ Ehrlich gesagt haben wir auch noch nicht mehr nutzen müssen... und wenn man von
     - typst universe
     The Holy way:
     - durch git hat man ein mächtiges versionierungssystem und kann änderungen günstig zurücksetzen ohne etwas zu verlieren.
-    - repositories like: Github, Codeberg, Git.cafe
+    - repositories wie: Github, Codeberg, Git.cafe
     - vs code um an den datein zu arbeiten und sogar die möglichkeit der live Kollaboration mit der live share extension @vsc_colab
   ],
   {
@@ -590,62 +597,123 @@ Ehrlich gesagt haben wir auch noch nicht mehr nutzen müssen... und wenn man von
 )
 
 
-== Limits
+== Wo Typst an Grenzen stößt
 
-- das typing system ist noch sehr ausbaufähig
-- wird in science papern meist nicht akzeptiert da diese oft nur Latex akzeptieren und den source code wollen. (aber auch hier gibt es langsam änderungen @github:tracl )
+#grid(
+  columns: (1fr, 1fr),
+  column-gutter: 2em,
+  ..(
+    ([Typprüfung], [
+      Typfehler fallen erst beim Auswerten auf. \
+      Eigene Funktionen können Eingaben mit `type()` prüfen.
+    ]),
+    ([Pakete und Vorlagen], [
+      Typst ist jünger als LaTeX. \
+      Für Spezialfälle gibt es weniger fertige Pakete und Vorlagen.
+    ]),
+  ).map(((title, body)) => [
+    #line(length: 1.8em, stroke: 2pt + accent)
+    #text(1.15em, weight: "bold", title)
+    #v(0.2em)
+    #body
+  ]),
+)
 
-
-
-== Typst mit KI
-
-mit typst:
-1357 Tokens @KI:tokenizer -> fast 40% weniger tokens (und auch 2000 character weniger)
-
-mit latex:
-2191 Tokens @KI:tokenizer -> ugf 60% mehr tokens als typst
-
+#v(1.15em)
+#block(
+  width: 100%,
+  fill: accent.lighten(95%),
+  stroke: (left: 2pt + accent),
+  inset: (x: 1em, y: 0.7em),
+)[
+  #text(1.15em, weight: "bold")[Wissenschaftlich publizieren]
+  #v(0.2em)
+  Das JMLR verlangt für die finale Fassung den LaTeX-Quelltext @jmlr:author_guide. \
+  Für ACL-Konferenzen gibt es mit tracl eine inoffizielle Typst-Vorlage @github:tracl.
+]
 
 
 == Zusammenfassung
-#plot(
-  width: if theme == "tubaf" { 9cm } else { 6cm },
-  height: if theme == "tubaf" { 8cm } else { 5cm },
-  xmin: 0,
-  xmax: 1,
-  ymin: 0,
-  ymax: 1,
-  xlabel: [Komplexität und Größe des Dokuments],
-  xlabel-anchor: 0,
-  xlabel-offset: (ox: -6.4, oy: -0.2),
-  ylabel: [Mühe & Zeit],
-  show-grid: none,
-  xtick-labels: none,
-  ytick-labels: none,
-  show-origin: false,
-  (
-    fn: x => calc.pow(x, 2) / 3.1 + 0.17,
-    stroke: green + 1.5pt,
-    label: image("images/Typst.svg.webp", height: 7mm),
-    label-pos: 0.75,
-    label-side: "below-right",
+#grid(
+  columns: (1fr, 1fr),
+  column-gutter: 2em,
+  plot(
+    width: if theme == "tubaf" { 9cm } else { 6cm },
+    height: if theme == "tubaf" { 8cm } else { 5cm },
+    xmin: 0,
+    xmax: 1,
+    ymin: 0,
+    ymax: 1,
+    xlabel: [Komplexität und Größe des Dokuments],
+    xlabel-anchor: 0,
+    xlabel-offset: (ox: -6.4, oy: -0.2),
+    ylabel: [Mühe & Zeit],
+    show-grid: none,
+    xtick-labels: none,
+    ytick-labels: none,
+    show-origin: false,
+    (
+      fn: x => calc.pow(x, 2) / 3.1 + 0.17,
+      stroke: green + 1.5pt,
+      label: image("images/Typst.svg.webp", height: 7mm),
+      label-pos: 0.75,
+      label-side: "below-right",
+    ),
+    (
+      fn: x => calc.pow(x, 2) / 1.7 + 0.25,
+      stroke: blue + 1.5pt,
+      label: image("images/LaTeX_logo.svg.webp", width: 40pt),
+      label-pos: 1.07,
+      label-side: "north",
+    ),
+    (
+      fn: x => calc.pow(1.7 * x, 2) + 0.04,
+      stroke: red + 1.5pt,
+      label: image("images/word icon.png", width: 30pt),
+      label-pos: 0.58,
+      label-side: "north",
+    ),
   ),
-  (
-    fn: x => calc.pow(x, 2) / 1.7 + 0.25,
-    stroke: blue + 1.5pt,
-    label: image("images/LaTeX_logo.svg.webp", width: 40pt),
-    label-pos: 1.07,
-    label-side: "north",
-  ),
-  (
-    fn: x => calc.pow(1.7 * x, 2) + 0.04,
-    stroke: red + 1.5pt,
-    label: image("images/word icon.png", width: 30pt),
-    label-pos: 0.58,
-    label-side: "north",
-  ),
-)
+  align(horizon)[
+    #let latex-tokens = 2191
+    #let typst-tokens = 1357
+    #let fewer = calc.round(100 * (1 - typst-tokens / latex-tokens))
+    #let typst-color = rgb("#08785f")
 
+    #text(1.1em, weight: "bold")[Tokenzahl im Beispiel]
+    #v(0.6em)
+
+    #grid(
+      columns: (auto, 1fr),
+      column-gutter: 0.75em,
+      row-gutter: 0.6em,
+      align: horizon,
+      ..(
+        ("LaTeX", latex-tokens, rgb("#546983")),
+        ("Typst", typst-tokens, typst-color),
+      )
+        .map(((name, tokens, color)) => (
+          text(weight: "semibold", name),
+          rect(
+            width: 100% * tokens / latex-tokens,
+            height: 1.7em,
+            inset: (x: 0.55em, y: 0pt),
+            radius: 2pt,
+            fill: color,
+            align(right + horizon, text(fill: white, weight: "bold", str(tokens))),
+          ),
+        ))
+        .flatten(),
+    )
+    #v(0.7em)
+
+    #text(weight: "bold", fill: typst-color)[Typst braucht #fewer % weniger Tokens.]
+    #linebreak()
+    #text(0.85em)[Der Quelltext ist rund 2.000 Zeichen kürzer.]
+    #v(0.25em)
+    #text(0.75em, fill: rgb("#475569"))[Gemessen mit dem OpenAI-Tokenizer @KI:tokenizer]
+  ],
+)
 
 
 #{
